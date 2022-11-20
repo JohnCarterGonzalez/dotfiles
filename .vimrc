@@ -1,3 +1,18 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+" VIMRC
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Author: John Carter Gonzalez
+
+" Table of Contents
+" Plugins, 13j
+" Plugins.config, 59j
+" Keymaps, 107j
+" Settings, 187j
+" AutoCommands, 238j
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let need_to_install_plugins = 0
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -7,31 +22,33 @@ endif
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
-Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'sbdchd/neoformat'
+
+" GUI Support
+Plug 'majutsushi/tagbar' " Current file structure
+Plug 'itchyny/lightline.vim' " Status Bar
+Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'ap/vim-buftabline'
 Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'jiangmiao/auto-pairs'
+
+" Semantic Support
+Plug 'ycm-core/YouCompleteMe'
+
+" Syntactic Support
 Plug 'dense-analysis/ale'
-Plug 'majutsushi/tagbar'
+Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'lepture/vim-jinja'
 Plug 'pangloss/vim-javascript'
 Plug 'alvan/vim-closetag'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'scrooloose/nerdcommenter'
-Plug 'sbdchd/neoformat'
-
-" Semantic Support
-Plug 'davidhalter/jedi-vim' " Jump to definition
-Plug 'ycm-core/YouCompleteMe'
 call plug#end()
-
-filetype plugin indent on
-syntax on
 
 if need_to_install_plugins == 1
     echo "Installing plugins..."
@@ -40,35 +57,64 @@ if need_to_install_plugins == 1
     q
 endif
 
-" always show the status bar
-set laststatus=2
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS.CONFIG
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" enable 256 colors
-set t_Co=256
-set t_ut=
+" file browser
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+let NERDTreeMinimalUI = 1
+let g:nerdtree_open = 0
+map <leader>n :call NERDTreeToggle()<CR>
+function NERDTreeToggle()
+    NERDTreeTabsToggle
+    if g:nerdtree_open == 1
+        let g:nerdtree_open = 0
+    else
+        let g:nerdtree_open = 1
+        wincmd p
+    endif
+endfunction
 
-" turn on line numbering
-set number
+function! StartUp()
+    if 0 == argc()
+        NERDTree
+    end
+endfunction
 
-" sane text files
-set fileformat=unix
-set encoding=utf-8
-set fileencoding=utf-8
+"NeoFormatter Config
+" Enable alignment
+let g:neoformat_basic_format_align = 1
 
-" sane editing
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set colorcolumn=80
-set expandtab
-set viminfo='25,\"50,n~/.viminfo
-autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+" Enable tab to space conversion
+let g:neoformat_basic_format_retab = 1
 
-" auto-pairs
-au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
 
+" Enable Python Highlighting 
+let g:python_highlight_all = 1
+
+" ale
+map <C-e> <Plug>(ale_next_wrap)
+map <C-r> <Plug>(ale_previous_wrap)
+
+" tags
+map <leader>t :TagbarToggle<CR>
+
+" lightline
+set noshowmode
+let g:lightline = { 'colorscheme': 'apprentice' }
+
+" buftabline
+set hidden
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" KEYMAPS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set escape to jk
+inoremap jj <ESC>
 " word movement
 imap <S-Left> <Esc>bi
 nmap <S-Left> b
@@ -83,7 +129,6 @@ vmap <Tab> >gv
 vmap <S-Tab> <gv
 
 " mouse
-set mouse=a
 let g:is_mouse_enabled = 1
 noremap <silent> <Leader>m :call ToggleMouse()<CR>
 function ToggleMouse()
@@ -98,23 +143,7 @@ function ToggleMouse()
     endif
 endfunction
 
-" color scheme
-syntax on
-colorscheme onedark
-filetype on
-filetype plugin indent on
-
-" lightline
-set noshowmode
-let g:lightline = { 'colorscheme': 'onedark' }
-hi Normal guibg=None ctermbg=None
-
-" code folding
-set foldmethod=indent
-set foldlevel=99
-
-" wrap toggle
-setlocal nowrap
+" code wrap
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 function ToggleWrap()
     if &wrap
@@ -156,48 +185,46 @@ nmap <leader>[ :bp!<CR>
 nmap <leader>] :bn!<CR>
 nmap <leader>x :bp<bar>bd#<CR>
 
-" restore place in file from previous session
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" file browser
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-let NERDTreeMinimalUI = 1
-let g:nerdtree_open = 0
-map <leader>n :call NERDTreeToggle()<CR>
-function NERDTreeToggle()
-    NERDTreeTabsToggle
-    if g:nerdtree_open == 1
-        let g:nerdtree_open = 0
-    else
-        let g:nerdtree_open = 1
-        wincmd p
-    endif
-endfunction
-
-function! StartUp()
-    if 0 == argc()
-        NERDTree
-    end
-endfunction
-autocmd VimEnter * call StartUp()
-
-" ale
-map <C-e> <Plug>(ale_next_wrap)
-map <C-r> <Plug>(ale_previous_wrap)
-
-" tags
-map <leader>t :TagbarToggle<CR>
-
 " copy, cut and paste
 vmap <C-c> "+y
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
-" disable autoindent when pasting text
-" source: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
-let &t_SI .= "\<Esc>[?2004h"
-let &t_EI .= "\<Esc>[?2004l"
+inoremap <special> <c
+
+" ignore case in search
+set ignorecase
+
+" turn on line numbering
+set number
+set relativenumber
+
+" sane text files
+set fileformat=unix
+set encoding=utf-8
+set fileencoding=utf-8
+
+" sane editing
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set colorcolumn=80
+set expandtab
+set viminfo='25,\"50,n~/.viminfo
+set mouse=a
+
+" color scheme
+syntax on
+set background=dark
+colorscheme gruvbox
+filetype on
+filetype plugin indent on
+hi Normal guibg=NONE ctermbg=NONE
+
+" code folding
+set foldmethod=indent
+set foldlevel=99
 
 function! XTermPasteBegin()
     set pastetoggle=<Esc>[201~
@@ -205,25 +232,23 @@ function! XTermPasteBegin()
     return ""
 endfunction
 
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+" wrap toggle
+setlocal nowrap
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AUTOCOMMANDS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
-" Deoplete Config
-let g:deoplete#enable_at_startup = 1
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " Closing Deoplete LSP Window
+" auto-pairs
+au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
 
-"NeoFormatter Config
-" Enable alignment
-let g:neoformat_basic_format_align = 1
+" restore place in file from previous session
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-" Enable tab to space conversion
-let g:neoformat_basic_format_retab = 1
+" disable autoindent when pasting text
+" source: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
 
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
-
-" Jedi-Vim Config
-" disable autocompletion, because we use deoplete for completion
-let g:jedi#completions_enabled = 1
-
-" open the go-to function in split, not another buffer
-let g:jedi#use_splits_not_buffers = "right"
