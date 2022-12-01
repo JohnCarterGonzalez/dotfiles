@@ -38,7 +38,8 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Semantic Support
-Plug 'tabnine/YouCompleteMe'
+Plug 'tabnine/YouCompleteMe', {'do': function('BuildYCM') }
+Plug 'SirVer/ultisnips'
 
 " Syntactic Support
 Plug 'dense-analysis/ale'
@@ -66,7 +67,25 @@ endif
 " PLUGINS.CONFIG
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
-"
+function! BuildYCM(info)
+   if a:info.status == 'installed' || a:info.force
+	  !./install.py
+   endif
+endfunction
+" Insurance Defaults
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctag files
+let g:ycm_use_utlisnips_completer = 1 " Let YCM use UltiSnips
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programmings lang keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in strings
+
+" UltiSnips
+" Trigger configuration. Do not use <tab> if you use YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<S-t>"
+let g:UltiSnipsJumpForwardTrigger="<S-f>"
+let g:UltiSnipsJumpBackwardTrigger="<S-b>"
+let g:UltiSnipsListSnippets="<S-l>"
+
 " file browser
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let NERDTreeMinimalUI = 1
@@ -199,7 +218,10 @@ imap <C-v> <ESC>"+pa
 
 inoremap <special> <c
 
-" ignore case in search
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"ignore case in search
 set ignorecase
 
 " turn on line numbering
@@ -232,12 +254,6 @@ hi Normal guibg=NONE ctermbg=NONE
 set foldmethod=indent
 set foldlevel=99
 
-function! XTermPasteBegin()
-    set pastetoggle=<Esc>[201~
-    set paste
-    return ""
-endfunction
-
 " wrap toggle
 setlocal nowrap
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -257,4 +273,10 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 " source: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
+
+function! XTermPasteBegin()
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
+endfunction
 
