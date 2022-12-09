@@ -38,18 +38,21 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Semantic Support
-Plug 'tabnine/YouCompleteMe', {'do': function('BuildYCM') }
+Plug 'tabnine/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 
 " Syntactic Support
 Plug 'dense-analysis/ale'
+Plug 'sheerun/vim-polglot'
+
 " Python Syntax
 Plug 'vim-python/python-syntax'
-Plug 'vim-scripts/indentpython.vim'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'lepture/vim-jinja'
 Plug 'pangloss/vim-javascript'
 Plug 'alvan/vim-closetag'
 Plug 'maxmellon/vim-jsx-pretty'
+
 " Ruby Syntax
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
@@ -66,16 +69,8 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS.CONFIG
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" YouCompleteMe
-function! BuildYCM(info)
-   if a:info.status == 'installed' || a:info.force
-	  !./install.py
-   endif
-endfunction
 " Insurance Defaults
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctag files
 let g:ycm_use_utlisnips_completer = 1 " Let YCM use UltiSnips
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programmings lang keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in strings
 
@@ -107,10 +102,6 @@ function! StartUp()
     end
 endfunction
 
-"NeoFormatter Config
-" Enable alignment
-let g:neoformat_basic_format_align = 1
-
 " Enable tab to space conversion
 let g:neoformat_basic_format_retab = 1
 
@@ -119,13 +110,37 @@ let g:neoformat_basic_format_trim = 1
 
 " Enable Python Highlighting 
 let g:python_highlight_all = 1
+let g:python_highlight_builtins = 1
 
 " ale
 map <C-e> <Plug>(ale_next_wrap)
 map <C-r> <Plug>(ale_previous_wrap)
-
-" tags
 map <leader>t :TagbarToggle<CR>
+nmap <F10> :ALEFix<CR>
+
+let g:ale_linters = {
+      \    'python': ['flake8', 'pylint'],
+      \   'ruby': ['standardrb', 'rubocop'],
+      \   'javascript': ['eslint'],
+      \}
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
+let g:ale_fixers = {'python': ['isort', 'yapf', 'remove_trailing_lines', 'trim_whitespace']}
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.' 
+let g:ale_completion_autoimport = 1 
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? 'OK' : printf(
+        \   '%d⨉ %d⚠ ',
+        \   all_non_errors,
+        \   all_errors
+        \)
+endfunction
+set statusline+=%=
+set statusline+=\ %{LinterStatus()}
 
 " lightline
 set noshowmode
@@ -141,7 +156,7 @@ nnoremap <C-P> :bprev<CR>
 " set escape to jk
 inoremap jj <ESC>
 " word movement
-imap <S-Left> <Esc>bi
+" imap <S-Left> <Esc>bi
 nmap <S-Left> b
 imap <S-Right> <Esc><Right>wi
 nmap <S-Right> w
@@ -263,6 +278,14 @@ autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
+
+au BufNewFile,BufRead *.py
+    \ set expandtab       " replace tabs with spaces
+    \ set autoindent      " copy indent when starting a new line
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set foldmethod=indent 
 " auto-pairs
 au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
 
