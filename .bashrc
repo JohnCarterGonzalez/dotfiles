@@ -180,3 +180,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Reset for current Project
+alias activate="source blogEnv/bin/activate"
