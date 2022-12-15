@@ -1,0 +1,23 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.workspace.library": [
+        "/home/cpt_n3m0/.config/nvim",
+        "/home/cpt_n3m0/.local/share/nvim/site",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/LuaSnip",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/mason.nvim",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/mini.nvim",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/packer.nvim",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/playground",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig",
+        "/usr/share/nvim/runtime",
+        "/usr/share/nvim/runtime/pack/dist/opt/matchit",
+        "/home/cpt_n3m0/.local/share/nvim/site/pack/packer/start/playground/after",
+        "/home/cpt_n3m0/.config/nvim/after",
+        "/usr/share/vim/vimfiles/",
+        "${3rd}/luassert/library"
+    ]
+}
