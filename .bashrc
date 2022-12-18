@@ -138,6 +138,7 @@ source "$OSH"/oh-my-bash.sh
 
 # App Aliases 
  alias vi="vim"
+ alias nv="nvim"
 
 # File Movement Aliases 
  alias aws_dir="cd ~/Documents/GitHub/AWS_Learning/"
@@ -147,8 +148,8 @@ source "$OSH"/oh-my-bash.sh
  alias portfolio_dir="cd ~/Documents/GitHub/Portfolio_Projects/"
 
 # Git Aliases
- alias gaa="git add -A"
- alias gcam="git commit -a -m"
+ alias gaa="git add ."
+ alias gcm="git commit -m"
  alias gb="git branch"
  alias gcb="git checkout -b"
  alias gd="git diff"
@@ -182,3 +183,8 @@ unset __conda_setup
 
 # Reset for current Project
 alias activate="source blogEnv/bin/activate"
+
+# Alias for Pentaho
+alias spoonme="/home/cpt_n3m0/Downloads/pdi-ce-9.3.0.0-428/data-integration && ./spoon.sh"
+
+# Postgresql activate
