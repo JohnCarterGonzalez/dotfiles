@@ -63,28 +63,37 @@ local function plugins(use)
     end,
   })
   use({
-    "neovim/nvim-lspconfig",
-    event = "BufReadPre",
-    requires = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      {
-        "L3MON4D3/LuaSnip",
-        config = function()
-          require("config.luasnip")
-        end,
-      },
-    },
-    config = function()
-      require("config.lsp")
-    end,
-  })
-  use({
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("config.treesitter")
     end,
   })
+  -- The Greatest Plugin for LSP ever
+  use ({
+  'VonHeikemen/lsp-zero.nvim',
+  requires = {
+    -- LSP Support
+    {'neovim/nvim-lspconfig'},
+    {'williamboman/mason.nvim'},
+    {'williamboman/mason-lspconfig.nvim'},
+
+    -- Autocompletion
+    {'hrsh7th/nvim-cmp'},
+    {'hrsh7th/cmp-buffer'},
+    {'hrsh7th/cmp-path'},
+    {'saadparwaiz1/cmp_luasnip'},
+    {'hrsh7th/cmp-nvim-lsp'},
+    {'hrsh7th/cmp-nvim-lua'},
+
+    -- Snippets
+    {'L3MON4D3/LuaSnip'},
+    {'rafamadriz/friendly-snippets'},
+  }
+})
+
+-- better colors
+  use({"rebelot/kanagawa.nvim"})
+
   use({ "nvim-treesitter/playground" })
   use({
     "nvim-tree/nvim-tree.lua",
