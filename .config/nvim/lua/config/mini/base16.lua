@@ -1,9 +1,9 @@
 require("mini.base16").setup({
 	palette = {
 		base00 = "#2b3339",
-		base01 = "#323c41",
-		base02 = "#503946",
-		base03 = "#868d80",
+		base01 = "#323c41", -- GutterColors
+		base02 = "#503946", --TabColors
+		base03 = "#fff9e8", -- CommentColors
 		base04 = "#d3c6aa",
 		base05 = "#d3c6aa",
 		base06 = "#e9e8d2",
@@ -19,3 +19,5 @@ require("mini.base16").setup({
 	},
 	use_cterm = true,
 })
+vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
+-- This is a comment

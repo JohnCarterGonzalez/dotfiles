@@ -1,6 +1,7 @@
 local cmd = vim.cmd
 local fn = vim.fn
 local api = vim.api
+require "config.lsp"
 
 -- Global object
 _G.NVMM = {}
@@ -92,8 +93,7 @@ local function plugins(use)
 })
 
 -- better colors
-  use({"rebelot/kanagawa.nvim"})
-
+  use({"navarasu/onedark.nvim"})
   use({ "nvim-treesitter/playground" })
   use({
     "nvim-tree/nvim-tree.lua",

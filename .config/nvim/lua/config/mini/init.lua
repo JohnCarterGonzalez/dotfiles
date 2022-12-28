@@ -17,6 +17,6 @@ require("mini.doc").setup({})
 require("mini.ai").setup({})
 
 -- custom settings
---require("config.mini.base16")
+require("config.mini.base16")
 require("config.mini.starter")
 require("config.mini.statusline")
