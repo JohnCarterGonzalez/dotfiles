@@ -1,5 +1,6 @@
-#+ATTR_HTML: :center t
-[[./assets/nix_logo_and_banner.png]]
+#+ATTR_HTML: :center t 
+[nix logo](./assets/nix_logo_and_banner.png)
+
 ** Welcome to My NixOS & Home-Manager Dotfiles
 
 Hey there, I'm John Carter, and this is where I keep my NixOS and Home-Manager configuration. If you're into this stuff, you might find something interesting here.
