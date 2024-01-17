@@ -1,4 +1,3 @@
-#+ATTR_HTML: :center t 
 ![nix_logo_and_banner](./assets/nix_logo_and_banner.png)
 
 ** Welcome to My NixOS & Home-Manager Dotfiles
