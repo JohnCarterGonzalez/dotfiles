@@ -78,16 +78,18 @@
 
       # Available through 'darwin-rebuild switch --flake .#MBP-work'
       darwinConfigurations."MBP-work" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
         specialArgs = { inherit inputs outputs; };
         modules = [
           ./nix-darwin/configuration.nix
-          home-manager.darwinModules.home-manager
           nixvim.nixDarwinModules.nixvim
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.johngonzalez = import ./nix-darwin/home.nix;
+          }
         ];
       };
-
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."MBP-work".pkgs;
-
     };
 }
