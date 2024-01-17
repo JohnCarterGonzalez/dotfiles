@@ -10,6 +10,11 @@
 	    url = "github:nix-community/home-manager/master";
 	    inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    nix-darwin  = {
+	url = "github:LnL7/nix-darwin";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hardware.url = "github:nixos/nixos-hardware";
     nixvim = {
@@ -27,6 +32,7 @@
     self,
     nixpkgs,
     home-manager,
+    nix-darwin,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -38,30 +44,18 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
-    # This is a function that generates an attribute by calling a function you
-    # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    # Your custom packages
-    # Accessible through 'nix build', 'nix shell', etc
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-    # Formatter for your nix files, available through 'nix fmt'
-    # Other options beside 'alejandra' include 'nixpkgs-fmt'
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
-    # Reusable nixos modules you might want to export
-    # These are usually stuff you would upstream into nixpkgs
     nixosModules = import ./modules/nixos;
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/home-manager;
+    nixDarwinModules = import ./modules/nix-darwin;
 
-    # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      # FIXME replace with your hostname
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
@@ -71,10 +65,8 @@
       };
     };
 
-    # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      # FIXME replace with your username@hostname
       "kn_kg@nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
@@ -84,5 +76,15 @@
         ];
       };
     };
+
+   # Available through 'darwin-rebuild switch --flake .#your-username'
+   darwinConfigurations."MBP-work" = nix-darwin.lib.darwinSystem {
+   modules = [ ./nix-darwin/configuration.nix ];
+   specialArgs = { inherit inputs; };
+   };
+
+   # Expose the package set, including overlays, for convenience.
+   darwinPackages = self.darwinConfigurations."MBP-work".pkgs;
+   
   };
 }
