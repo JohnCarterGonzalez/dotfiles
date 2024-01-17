@@ -57,6 +57,10 @@
     })
     config.nix.registry;
 
+  environment.systemPackages = with pkgs; [
+    discord
+  ];
+
   nix.settings = {
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
