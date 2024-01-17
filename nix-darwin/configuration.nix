@@ -1,12 +1,8 @@
 { pkgs, lib, inputs, ... }:
-# let
-#   nixvim = import (builtins.fetchFromGithub {
-#     url = "https://github.com/nix-community/nixvim";
-#   });
-# in
 {
-
-  imports = [ ./editor ];
+  imports = [ 
+    ./editor 
+  ];
   environment.systemPackages = with pkgs; [
     nix-direnv
     direnv
