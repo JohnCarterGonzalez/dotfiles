@@ -39,6 +39,7 @@
   programs = {
 	home-manager.enable = true;
         git.enable = true;
+        bat.enable = true;
   };
 
   services = {
