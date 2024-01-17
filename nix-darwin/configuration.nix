@@ -1,4 +1,12 @@
-{ pkgs, lib, inputs, ... }: {
+{ pkgs, lib, inputs, ... }: 
+# let
+#   nixvim = import (builtins.fetchFromGithub {
+#     url = "https://github.com/nix-community/nixvim";
+#   });
+# in
+{
+
+  imports = [ ./editor ];
   environment.systemPackages = with pkgs; [ nix-direnv supabase-cli nixfmt vim ];
   fonts.fonts = with pkgs; [ nerdfonts ];
   # Auto upgrade nix package and the daemon service.
@@ -13,6 +21,7 @@
     "amethyst"
     "discord"
     "firefox"
+    "wezterm"
   ];
 };
 
@@ -29,16 +38,16 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
-  #       users.users.johngonzalez = {
-  # 	  name = "johngonzalez";
-  # 	  home = "/Users/johngonzalez";
-  # 	};
-  # 	home-manager.users.johngonzalez = { pkgs, ... }: {
-  # 	  home.packages = [ pkgs.atool pkgs.httpie ];
-  # 
-  # 	  # The state version is required and should stay at the version you
-  # 	  # originally installed.
-  # 	  home.stateVersion = "23.11";
-  # 	};
+    users.users.johngonzalez = {
+    name = "johngonzalez";
+    home = "/Users/johngonzalez";
+  };
+  home-manager.users.johngonzalez = { pkgs, ... }: {
+    home.packages = with pkgs; [ httpie ];
+  
+    # The state version is required and should stay at the version you
+    # originally installed.
+    home.stateVersion = "23.11";
+  };
 }
 
