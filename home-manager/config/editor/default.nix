@@ -4,6 +4,9 @@
 		enable = true;
 		colorschemes.oxocarbon.enable = true;
                 plugins = {
+                  lualine = {
+                    enable = true;
+                  };
                   bufferline.enable = true;
                   lsp.enable = false;
 
