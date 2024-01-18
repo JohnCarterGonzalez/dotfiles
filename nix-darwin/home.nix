@@ -20,7 +20,7 @@
     homeDirectory = "/Users/johngonzalez";
   };
 
-  home.packages = with pkgs; [ httpie ];
+  # home.packages = with pkgs; [ eza httpie ];
 
   # Enable home-manager and git
   programs = {
@@ -28,8 +28,21 @@
         starship = {
           enable = true;
         };
+        eza = {
+          git = true;
+          icons = true;
+        };
         zsh = {
           enable = true;
+          shellAliases = {
+            ls = "eza -la";
+            work = "cd ~/workspaces/projects/work";
+            notes = "cd ~/workspaces/org && nvim .";
+            home = "nvim ~/dotfiles/nix-darwin/home.nix";
+            homeup = "cd ~/dotfiles/ && git add . && cd && darwin-rebuild switch --flake ~/dotfiles/.#MBP-work";
+            darwin = "nvim ~/dotfiles/nix-darwin/configuration.nix";
+            ml = "cd ~/workspaces/projects/hobby_lobby/";
+          };
         };
         git.enable = true;
         bat.enable = true;

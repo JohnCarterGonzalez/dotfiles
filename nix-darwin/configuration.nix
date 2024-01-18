@@ -6,13 +6,15 @@
   environment.systemPackages = with pkgs; [
     nix-direnv
     direnv
-    supabase-cli
     nixfmt
-    vim
     tree
+    eza
+    tmux
   ];
+
   fonts.fonts = with pkgs; [ nerdfonts ];
-  # Auto upgrade nix package and the daemon service.
+
+
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
   homebrew = {
@@ -25,10 +27,6 @@
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
-
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  # programs.zsh.enable = true; # default shell on catalina
-  # programs.fish.enable = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
