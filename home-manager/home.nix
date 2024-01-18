@@ -33,7 +33,7 @@
     homeDirectory = "/home/kn_kg";
   };
 
-  home.packages = with pkgs; [ supabase-cli ];
+  # home.packages = with pkgs; [ supabase-cli ];
 
   # Enable home-manager and git
   programs = {
