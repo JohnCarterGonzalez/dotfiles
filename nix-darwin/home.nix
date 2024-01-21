@@ -25,10 +25,71 @@
   # Enable home-manager and git
   programs = {
 	home-manager.enable = true;
+        direnv.enable = true;
+        alacritty = {
+            enable = true;
+            settings = {
+              env = {
+                "TERM" = "xterm-256color";
+              };
+
+              window = {
+                padding.x = 10;
+                padding.y = 10;
+                decorations = "None";
+                opacity = 0.9;
+              };
+
+              font = {
+                size = 10.0;
+
+                normal.family = "FuraCode Nerd Font";
+                bold.family = "FuraCode Nerd Font";
+                italic.family = "FuraCode Nerd Font";
+               };
+
+                colors = {
+                  primary = {
+                    background = "#181616";
+                    foreground= "#c5c9c5";
+                   };
+
+                  normal = {
+                    black =   "#0d0c0c"; 
+                    red = "#eb6f92";
+                    green = "#31748f";
+                    yellow = "#f6c177";
+                    blue = "#9ccfd8";
+                    magenta = "#c4a7e7";
+                    cyan = "#ebbcba";
+                    white = "#e0def4";
+                   };
+
+                  bright = {
+                    black =   "#a6a69c";
+                    red = "#eb6f92";
+                    green = "#31748f";
+                    yellow = "#f6c177";
+                    blue = "#9ccfd8";
+                    magenta = "#c4a7e7";
+                    cyan = "#ebbcba";
+                    white = "#e0def4";
+                   };
+                    
+
+                  selection = {
+                    background= "#2D4F67";
+                    foreground= "#C8C093";
+                  };
+
+                };
+              };
+          };
         starship = {
           enable = true;
         };
         eza = {
+          enable = true;
           git = true;
           icons = true;
         };
@@ -38,6 +99,7 @@
             ls = "eza -la";
             work = "cd ~/workspaces/projects/work";
             notes = "cd ~/workspaces/org && nvim .";
+            uni = "cd ~/workspaces/resources/LCTHW/ && nvim .";
             home = "nvim ~/dotfiles/nix-darwin/home.nix";
             homeup = "cd ~/dotfiles/ && git add . && cd && darwin-rebuild switch --flake ~/dotfiles/.#MBP-work";
             darwin = "nvim ~/dotfiles/nix-darwin/configuration.nix";

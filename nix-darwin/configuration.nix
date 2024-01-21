@@ -5,11 +5,11 @@
   ];
   environment.systemPackages = with pkgs; [
     nix-direnv
-    direnv
     nixfmt
     tree
     eza
     tmux
+    direnv
   ];
 
   fonts.fonts = with pkgs; [ nerdfonts ];
@@ -22,7 +22,7 @@
     onActivation.upgrade = true;
     # updates homebrew packages on activation,
     # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
-    casks = [ "amethyst" "discord" "firefox" "wezterm" ];
+    casks = [ "alacritty" "amethyst" "discord" "firefox" "wezterm" ];
   };
 
   # Necessary for using flakes on this system.

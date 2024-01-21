@@ -2,7 +2,12 @@
 
   programs.nixvim = {
     enable = true;
-    colorschemes.oxocarbon.enable = true;
+    colorschemes.rose-pine = {
+      enable = true;
+      style = "main";
+      transparentBackground = true;
+    };
+    
     plugins = {
       neorg = {
         enable = true;
@@ -18,8 +23,6 @@
           };
         };
       };
-      lualine = { enable = true; };
-      bufferline.enable = true;
       lsp.enable = false;
 
       harpoon = {
