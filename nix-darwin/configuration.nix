@@ -12,8 +12,12 @@
     direnv
   ];
 
-  fonts.fonts = with pkgs; [ nerdfonts ];
-
+  fonts ={
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      fira-code-nerdfont
+    ];
+  };
 
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
