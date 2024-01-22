@@ -5,8 +5,8 @@
     enable = true;
     enableCompletion = true;
     shellAliases = {
-      home = "nvim ~/dotfiles/cfg/home-manager/home.nix";
-      homeup =
+      nix-home = "nvim ~/dotfiles/cfg/home-manager/home.nix";
+      nix-homeup =
         "home-manager switch --flake ~/dotfiles/cfg/.#kn_kg@nixos";
       system = "nvim ~/dotfiles/cfg/nixos/configuration.nix";
       systemup =
