@@ -1,5 +1,5 @@
 {
-  description = "Dotfiles Config Flake";
+  description = "Source Flake for Dotfiles";
 
   inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; };
 
