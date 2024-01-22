@@ -15,11 +15,11 @@
     ];
   in {
     templates = {
-      dotfiles = {
+      cfg = {
         description = ''
           Dotfiles for NixOS and Nix-Darwin Development Environments
         '';
-        path = ./system;
+        path = ./cfg;
       };
     };
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);

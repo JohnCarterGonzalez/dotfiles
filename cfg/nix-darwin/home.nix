@@ -100,9 +100,9 @@
             work = "cd ~/workspaces/projects/work";
             notes = "cd ~/workspaces/org && nvim .";
             uni = "cd ~/workspaces/resources/LCTHW/ && nvim .";
-            home = "nvim ~/dotfiles/nix-darwin/home.nix";
-            homeup = "cd ~/dotfiles/ && git add . && cd && darwin-rebuild switch --flake ~/dotfiles/.#MBP-work";
-            darwin = "nvim ~/dotfiles/nix-darwin/configuration.nix";
+            home = "nvim ~/dotfiles/cfg/nix-darwin/home.nix";
+            homeup = "cd ~/dotfiles/cfg/ && git add . && cd && darwin-rebuild switch --flake ~/dotfiles/cfg/.#MBP-work";
+            darwin = "nvim ~/dotfiles/cfg/nix-darwin/configuration.nix";
             ml = "cd ~/workspaces/projects/hobby_lobby/";
           };
         };
