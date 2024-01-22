@@ -10,6 +10,8 @@
     eza
     tmux
     direnv
+    supabase-cli
+    vscode
   ];
 
   fonts ={
@@ -19,6 +21,7 @@
     ];
   };
 
+  allowUnfree = true;
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
   homebrew = {
@@ -28,6 +31,7 @@
     # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
     casks = [ "alacritty" "amethyst" "discord" "firefox" "wezterm" ];
   };
+
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
