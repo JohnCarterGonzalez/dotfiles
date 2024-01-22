@@ -1,8 +1,8 @@
 {
-  description = "NixOS + standalone home-manager config flakes to get you started!";
+  description = "Dotfiles Config Flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
   outputs = {nixpkgs, ...}: let
