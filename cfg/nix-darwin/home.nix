@@ -106,7 +106,11 @@
             ml = "cd ~/workspaces/projects/hobby_lobby/";
           };
         };
-        git.enable = true;
+        git = {
+          enable = true;
+          userName = "JCGonzalez";
+          userEmail = "john@selkirk.com";
+        };
         bat.enable = true;
         tmux = {
           enable = true;
