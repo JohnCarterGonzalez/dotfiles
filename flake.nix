@@ -14,14 +14,12 @@
       "x86_64-darwin"
     ];
   in {
-    templates = {
-      cfg = {
+    templates.cfg = {
         description = ''
           Dotfiles for NixOS and Nix-Darwin Development Environments
         '';
         path = ./cfg;
       };
-    };
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
 }
