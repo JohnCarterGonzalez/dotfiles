@@ -22,7 +22,10 @@
 
   programs = {
 	home-manager.enable = true;
-        direnv.enable = true;
+        direnv = {
+          enable = true;
+          nix-direnv.enable = true;
+        };
         alacritty = {
             enable = true;
             settings = {
@@ -40,9 +43,9 @@
               font = {
                 size = 10.0;
 
-                normal.family = "FiraCode Nerd Font";
-                bold.family = "FiraCode Nerd Font";
-                italic.family = "FiraCode Nerd Font";
+                normal.family = "JetBrainsMono Nerd Font Mono";
+                bold.family = "JetBrainsMono Nerd Font Mono";
+                italic.family = "JetBrainsMono Nerd Font Mono";
                };
 
                 colors = {
@@ -52,7 +55,7 @@
                    };
 
                   normal = {
-                    black =   "#0d0c0c"; 
+                    black =   "#0d0c0c";
                     red = "#eb6f92";
                     green = "#31748f";
                     yellow = "#f6c177";
@@ -72,7 +75,7 @@
                     cyan = "#ebbcba";
                     white = "#e0def4";
                    };
-                    
+
 
                   selection = {
                     background= "#2D4F67";
@@ -95,8 +98,8 @@
           shellAliases = {
             ls = "eza -la";
             work = "cd ~/workspaces/projects/work";
-            notes = "cd ~/workspaces/org && nvim .";
-            uni = "cd ~/workspaces/resources/LCTHW/ && nvim .";
+            notes = "cd ~/workspaces/org && hx .";
+            uni = "cd ~/workspaces/resources/LCTHW/ && hx .";
             home = "nvim ~/dotfiles/cfg/nix-darwin/home.nix";
             homeup = "cd ~/dotfiles/cfg/ && git add . && cd && darwin-rebuild switch --flake ~/dotfiles/cfg/.#MBP-work";
             darwin = "nvim ~/dotfiles/cfg/nix-darwin/configuration.nix";
@@ -115,7 +118,7 @@
           baseIndex = 1;
           prefix = "C-z";
           extraConfig = ''
-            # split windows using | and - 
+            # split windows using | and -
             bind | split-window -h
             bind - split-window -v
 
@@ -133,8 +136,8 @@
 
             # resize panes using VIM style with prefix
             bind -r -T prefix M-h resize-pane -L 5
-            bind -r -T prefix M-l resize-pane -R 5 
-            bind -r -T prefix M-k resize-pane -U 5 
+            bind -r -T prefix M-l resize-pane -R 5
+            bind -r -T prefix M-k resize-pane -U 5
             bind -r -T prefix M-j resize-pane -D 5
 
             # DESIGN TWEAKS

@@ -1,8 +1,5 @@
-{ pkgs, lib, inputs, ... }:
-{
-  imports = [ 
-    ./editor 
-  ];
+{ pkgs, lib, inputs, ... }: {
+  imports = [ ./editor ];
   environment.systemPackages = with pkgs; [
     nix-direnv
     nixfmt
@@ -11,17 +8,13 @@
     tmux
     direnv
     supabase-cli
-    vscode
   ];
 
-  fonts ={
+  fonts = {
     fontDir.enable = true;
-    fonts = with pkgs; [
-      fira-code-nerdfont
-    ];
+    fonts = with pkgs; [ fira-code-nerdfont ];
   };
 
-  allowUnfree = true;
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
   homebrew = {
@@ -29,9 +22,9 @@
     onActivation.upgrade = true;
     # updates homebrew packages on activation,
     # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
-    casks = [ "alacritty" "amethyst" "discord" "firefox" "wezterm" ];
+    casks = [ "alacritty" "amethyst" "discord" "firefox" "spotify" ];
+    brews = [ "livekit" "foreman" ];
   };
-
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
@@ -47,4 +40,3 @@
     home = "/Users/johngonzalez";
   };
 }
-
