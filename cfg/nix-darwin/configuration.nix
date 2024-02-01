@@ -8,6 +8,8 @@
     tmux
     direnv
     supabase-cli
+    bat
+    gotop
   ];
 
   fonts = {
@@ -19,10 +21,10 @@
   nix.package = pkgs.nix;
   homebrew = {
     enable = true;
-    onActivation.upgrade = true;
     # updates homebrew packages on activation,
-    # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
-    casks = [ "alacritty" "amethyst" "discord" "firefox" "spotify" ];
+    # makes builds slower, but I would forget otherwise
+    onActivation.upgrade = true;
+    casks = [ "alacritty" "amethyst" "discord" "spotify" ];
     brews = [ "livekit" "foreman" ];
   };
 

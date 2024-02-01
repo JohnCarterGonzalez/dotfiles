@@ -111,7 +111,6 @@
           userName = "JCGonzalez";
           userEmail = "john@selkirk.com";
         };
-        bat.enable = true;
         tmux = {
           enable = true;
           keyMode = "vi";
