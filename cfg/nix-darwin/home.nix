@@ -119,7 +119,7 @@
             darwin = "nvim ~/dotfiles/cfg/nix-darwin/configuration.nix";
             ml = "cd ~/workspaces/projects/hobby_lobby/";
           };
-        };
+          };
         git = {
           enable = true;
           userName = "JCGonzalez";

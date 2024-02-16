@@ -24,8 +24,8 @@
     # updates homebrew packages on activation,
     # makes builds slower, but I would forget otherwise
     onActivation.upgrade = true;
-    casks = [ "alacritty" "amethyst" "discord" "spotify" ];
-    brews = [ "livekit" "foreman" "deno"];
+    casks = [ "alacritty" "amethyst" "discord" "spotify" "modular" ];
+    brews = [ "jq" "livekit" "foreman" "deno"];
   };
 
   # Necessary for using flakes on this system.
