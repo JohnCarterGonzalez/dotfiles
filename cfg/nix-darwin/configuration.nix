@@ -24,8 +24,9 @@
     # updates homebrew packages on activation,
     # makes builds slower, but I would forget otherwise
     onActivation.upgrade = true;
-    casks = [ "alacritty" "amethyst" "discord" "spotify" "modular" ];
-    brews = [ "jq" "livekit" "foreman" "deno"];
+    taps = ["d12frosted/emacs-plus"];
+    casks = [  "amethyst" "discord" "spotify"  ];
+    brews = [ "emacs-plus" "libtool" "cmake" "jq" "livekit" "foreman" "deno" ];
   };
 
   # Necessary for using flakes on this system.

@@ -26,6 +26,18 @@
           '';
           path = ./node;
         };
+        deno = {
+          description = ''
+            Basic flake for deno dev environment & build system
+          '';
+          path = ./deno;
+        };
+        jupyter-poetry = {
+          description = ''
+            Basic Flake for jupyter notebook projects using poetry
+          '';
+          path = ./jupyter-poetry;
+        };
       };
       formatter =
         forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
