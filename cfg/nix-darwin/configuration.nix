@@ -25,7 +25,7 @@
     # makes builds slower, but I would forget otherwise
     onActivation.upgrade = true;
     taps = ["d12frosted/emacs-plus"];
-    casks = [  "amethyst" "discord" "spotify"  ];
+    casks = [  "alacritty" "amethyst" "discord" "spotify"  ];
     brews = [ "emacs-plus" "libtool" "cmake" "jq" "livekit" "foreman" "deno" ];
   };
 
