@@ -13,7 +13,7 @@
         "sudo nixos-rebuild switch --flake ~/dotfiles/cfg/.#nixos";
       cleanup = "sudo nix-collect-garbage -d";
       ls = "eza -la";
-      edcfg = "nvim ~/dotfiles/cfg/home-manager/config/editor/default.nix";
+      edcfg = "nvim ~/dotfiles/cfg/home-manager/config/editor/nvim/default.nix";
     };
   };
 }

@@ -1,61 +1,62 @@
 { config, lib, pkgs, ...}:
 {
   programs.alacritty = {
-    enable = true;
-    settings = {
-      env = {
-        "TERM" = "xterm-256color";
-      };
+      enable = true;
+      settings = {
+        env = {
+          "TERM" = "xterm-256color";
+        };
 
-      window = {
-        padding.x = 10;
-        padding.y = 10;
-        decorations = "None";
-	opacity = 0.7;
-      };
+        window = {
+          padding.x = 10;
+          padding.y = 10;
+          decorations = "None";
+          opacity = 0.9;
+        };
 
-      font = {
-        size = 10.0;
-        # normal.family = "FuraCode Nerd Font";
-        # bold.family = "FuraCode Nerd Font";
-        # italic.family = "FuraCode Nerd Font";
-       };
+        font = {
+          size = 10.0;
 
-	colors = {
-	  primary = {
-	    background = "#161616";
-	    foreground= "#ffffff";
-	   };
+          normal.family = "FiraCode Nerd Font";
+          bold.family = "FiraCode Nerd Font";
+          italic.family = "FiraCode Nerd Font";
+         };
 
-	  normal = {
-	    black =   "#262626";
-	    magenta = "#ff7eb6";
-	    red =     "#ee5396";
-	    green =   "#42be65";
-	    yellow =  "#ffe97b";
-	    blue =    "#33b1ff";
-	    cyan =    "#3ddbd9";
-	    white =   "#dde1e6";
-	   };
+          colors = {
+            primary = {
+              background = "#181616";
+              foreground= "#c5c9c5";
+             };
 
-	  bright = {
-            black =  "#393939";
-            magenta =  "#ff7eb6";
-            green =  "#42be65";
-            yellow =  "#ffe97b";
-            blue =  "#33b1ff";
-            red =  "#ee5396";
-            cyan =  "#3ddbd9";
-            white =  "#ffffff";
-	   };
-	    
+            normal = {
+              black =   "#0d0c0c"; 
+              red = "#eb6f92";
+              green = "#31748f";
+              yellow = "#f6c177";
+              blue = "#9ccfd8";
+              magenta = "#c4a7e7";
+              cyan = "#ebbcba";
+              white = "#e0def4";
+             };
 
-	  selection = {
-	    background= "#2D4F67";
-	    foreground= "#C8C093";
-	  };
+            bright = {
+              black =   "#a6a69c";
+              red = "#eb6f92";
+              green = "#31748f";
+              yellow = "#f6c177";
+              blue = "#9ccfd8";
+              magenta = "#c4a7e7";
+              cyan = "#ebbcba";
+              white = "#e0def4";
+             };
+              
 
-       	};
-      };
-  };
+            selection = {
+              background= "#2D4F67";
+              foreground= "#C8C093";
+            };
+
+          };
+        };
+    };
 }

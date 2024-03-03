@@ -1,6 +1,16 @@
 { inputs, outputs, lib, config, pkgs, ... }: {
 
   nixpkgs = {
+=======
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+nixpkgs = {
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
