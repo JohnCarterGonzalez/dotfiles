@@ -1,9 +1,3 @@
-{ inputs, outputs, lib, config, pkgs, ... }: {
-
-  imports = [ ./cfg ];
-
-  nixpkgs = {
-=======
 {
   inputs,
   outputs,
@@ -12,6 +6,7 @@
   pkgs,
   ...
 }: {
+imports = [ ./cfg ];
 nixpkgs = {
     # Configure your nixpkgs instance
     config = {

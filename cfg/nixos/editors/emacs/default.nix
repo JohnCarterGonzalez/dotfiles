@@ -5,7 +5,7 @@
     package = pkgs.emacs-nox;
 
     extraPackages = epkgs: with epkgs; [
-
+      python-mode
       nix-mode
       magit
       lsp-mode
@@ -20,6 +20,7 @@
 
     extraConfig = builtins.readFile ./init.el;
   };
+
   services.emacs = {
     enable = true;
     client.enable = true;

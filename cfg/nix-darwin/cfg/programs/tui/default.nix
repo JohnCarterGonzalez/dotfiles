@@ -2,7 +2,7 @@
 {
 	imports = [
           ./alacritty.nix
-          ./zsh.nix
+          ./emacs
           ./tmux.nix
           ./starship.nix
 	];

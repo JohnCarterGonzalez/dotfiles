@@ -1,7 +1,7 @@
-{pkgs, lib, config, ...}:
+{ pkgs, ...}:
 {
-  import = [
-    ./nvim
-    ./emacs
-  ];
+	imports = [
+          ./nvim
+	];
 }
+
