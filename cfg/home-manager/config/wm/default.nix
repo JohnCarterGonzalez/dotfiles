@@ -186,7 +186,7 @@ wayland.windowManager.hyprland = {
     systemd.enable = true;
     settings = {
             exec = [
-                "${pkgs.swaybg}/bin/swaybg -i ~/dotfiles/system/home-manager/programs/hypr/assets/dark_minimal_outerspace.png --mode fill"
+                "${pkgs.swaybg}/bin/swaybg -i ~/dotfiles/assets/wallpapers/night_sky_mountain.jpg --mode fill"
               ];
       };
   };

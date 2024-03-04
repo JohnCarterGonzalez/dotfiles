@@ -20,6 +20,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./common
+    ./steam
   ];
 
   nixpkgs = {
@@ -59,6 +60,8 @@
 
   environment.systemPackages = with pkgs; [
     discord
+    tree
+    pavucontrol
   ];
 
   nix.settings = {
