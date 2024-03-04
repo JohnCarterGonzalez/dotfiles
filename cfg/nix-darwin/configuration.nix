@@ -26,7 +26,7 @@
     onActivation.upgrade = true;
     taps = ["d12frosted/emacs-plus"];
     casks = [  "alacritty" "amethyst" "discord" "spotify"  ];
-    brews = [ "emacs-plus" "libtool" "cmake" "jq" "livekit" "foreman" "deno" ];
+    brews = [ "emacs-plus@29" "tmux" "libtool" "cmake" "jq" "livekit" "foreman" "deno" ];
   };
 
   # Necessary for using flakes on this system.
