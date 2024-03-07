@@ -8,7 +8,7 @@
           padding.x = 10;
           padding.y = 10;
           decorations = "None";
-          opacity = 0.9;
+          opacity = 0.8;
         };
         font = {
           size = 10.0;
@@ -18,45 +18,28 @@
         };
         colors = {
           primary = {
-            background = "#1E1E2E";
-            foreground = "#CDD6F4";
-            dim_foreground = "#CDD6F4";
-            bright_foreground = "#CDD6F4";
-          };
+            background = "#181818";
+            foreground= "0xd4be98";
+        };
           normal = {
-            black = "#0d0c0c";
-            red = "#F38BA8";
-            green = "#A6E3A1";
-            yellow = "#F9E2AF";
-            blue = "#89B4FA";
-            magenta = "#F5C2E7";
-            cyan = "#94E2D5";
-            white = "#BAC2DE";
+            black=   "#000000";
+            red=     "0xea6962";
+            green=   "0xa9b665";
+            yellow=  "0xd8a657";
+            blue=    "0x7daea3";
+            magenta= "0xd3869b";
+            cyan=    "0x89b482";
+            white=   "0xd4be98";
           };
           bright = {
-            black = "#585B70";
-            red = "#F38BA8";
-            green = "#A6E3A1";
-            yellow = "#F9E2AF";
-            blue = "#89B4FA";
-            magenta = "#F5C2E7";
-            cyan = "#94E2D5";
-            white = "#A6ADC8";
-          };
-          dim = {
-            black = "#45475A";
-            red = "#F38BA8";
-            green = "#A6E3A1";
-            yellow = "#F9E2AF";
-            blue = "#89B4FA";
-            magenta = "#F5C2E7";
-            cyan = "#94E2D5";
-            white = "#BAC2DE";
-          };
-
-          selection = {
-            text = "#1E1E2E";
-            background = "#F5E0DC";
+            black=   "#282828";
+            red=     "0xea6962";
+            green=   "0xa9b665";
+            yellow=  "0xd8a657";
+            blue=    "0x7daea3";
+            magenta= "0xd3869b";
+            cyan=    "0x89b482";
+            white=   "0xd4be98";
           };
         };
       };
