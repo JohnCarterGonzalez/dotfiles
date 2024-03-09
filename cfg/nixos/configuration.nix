@@ -23,6 +23,7 @@
     ./steam
   ];
 
+
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -62,6 +63,8 @@
     discord
     tree
     pavucontrol
+    unzip
+    neofetch
   ];
 
   nix.settings = {
@@ -78,9 +81,9 @@
   xdg.portal.config.common.default = "*";
 
   boot = {
-	  loader.systemd-boot.enable = true;
-	  initrd.kernelModules = [ "amdgpu"];
-	  };
+    loader.systemd-boot.enable = true;
+    initrd.kernelModules = [ "amdgpu"];
+  };
 
   users.users = {
     kn_kg = {
@@ -111,7 +114,13 @@
 			};
 		};
 	};
-	opengl.enable = true;
+        opengl = {
+          enable = true;
+          extraPackages = with pkgs; [
+            rocmPackages.clr.icd
+            amdvlk
+          ];
+        };
   };
 
   sound.enable = true;

@@ -4,7 +4,7 @@
     enable = true;
     colorschemes.base16 = {
       enable = true;
-      colorscheme = "google-dark";
+      colorscheme = "tokyo-night-dark";
     };
     extraConfigLua = ''
       local modes = {
