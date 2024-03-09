@@ -2,14 +2,107 @@
 
   programs.nixvim = {
     enable = true;
-    colorschemes.catppuccin = {
-      enable = true;
-      flavour = "mocha";
-      transparentBackground = true;
-      colorOverrides.macchiato = {
-        base = "#000000";
+
+    plugins = {
+      rustaceanvim = {
+        enable = true;
+      };
+      neogen = {
+        enable = true;
+        keymaps = {
+          generate = "<leader>ng";
+          generateClass = "<leader>ngc";
+          generateFunction = "<leader>ngf";
+          generateType = "<leader>ngt";
+        };
+      };
+      gitsigns = {
+        enable = true;
+      };
+      neorg = {
+        enable = true;
+        modules = {
+          "core.defaults" = { __empty = null; };
+          "core.dirman" = {
+            config = {
+              workspaces = {
+                home = "~/workspaces/org/home";
+                work = "~/workspaces/org/work";
+              };
+            };
+          };
+        };
+      };
+      neogit = { enable = true; };
+      nix-develop = { enable = true; };
+      oil = {
+        enable = true;
+        skipConfirmForSimpleEdits = true;
+      };
+      lsp = {
+        enable = true;
+        servers = { denols = { enable = true; }; };
+      };
+      harpoon = {
+        enable = true;
+        keymaps = {
+          addFile = "<leader>ha";
+          toggleQuickMenu = "<leader>hm";
+        };
+      };
+      telescope = {
+        enable = true;
+        defaults.file_ignore_patterns = [ "^.git/" ];
+      };
+
+      treesitter.enable = true;
+      treesitter-context.enable = true;
+      clangd-extensions.enable = true;
+      nvim-autopairs = {
+        enable = true;
+        enableAfterQuote = true;
+        enableBracketInQuote = true;
+      };
+
+      nvim-cmp = {
+        enable = true;
+        autoEnableSources = true;
+        sources =
+          [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
+
+        mapping = {
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<C-y>" = {
+            action = "cmp.mapping.select_next_item()";
+            modes = [ "i" "s" ];
+          };
+          "<C-c>" = "cmp.mapping.close()";
+        };
       };
     };
+    extraPlugins = with pkgs;
+      [
+        (vimUtils.buildVimPlugin {
+          name = "mellifluous";
+          src = pkgs.fetchFromGitHub {
+            owner = "ramojus";
+            repo = "mellifluous.nvim";
+            rev = "42ccf800b96b4ff401506c3eebabea1975cf2d4b";
+            hash = "sha256-uRBAiPHr0+fundLShIvjdyGsA4gPNcUloY79fQ9aGxg=";
+          };
+        })
+      ];
+
+    globals.mapleader = " ";
+    keymaps = [{
+      action = "<cmd>Telescope find_files<CR>";
+      key = "<leader>ff";
+    }];
+    autoCmd = [{
+      event = [ "BufEnter" "BufWinEnter" ];
+      pattern = [ "*.c" "*.h" ];
+      command = "echo 'Abandon all hope ye who enter'";
+    }];
     extraConfigLua = ''
       local opt = vim.opt
 
@@ -229,92 +322,62 @@
         ]],
               false
       )
+
+      -- Colorscheme
+      require 'mellifluous'.setup({
+            dim_inactive = false,
+            color_set = 'mellifluous',
+            styles = { -- see :h attr-list for options. set {} for NONE, { option = true } for option
+                comments = { italic = true },
+                conditionals = {},
+                folds = {},
+                loops = {},
+                functions = {},
+                keywords = {},
+                strings = {},
+                variables = {},
+                numbers = {},
+                booleans = {},
+                properties = {},
+                types = {},
+                operators = {},
+                markup = {
+                    headings = { bold = true },
+                },
+            },
+            transparent_background = {
+                enabled = false,
+                floating_windows = true,
+                telescope = true,
+                file_tree = true,
+                cursor_line = true,
+                status_line = false,
+            },
+            flat_background = {
+                line_numbers = false,
+                floating_windows = false,
+                file_tree = false,
+                cursor_line_number = false,
+            },
+            plugins = {
+                cmp = true,
+                gitsigns = true,
+                indent_blankline = false,
+                nvim_tree = {
+                    enabled = false,
+                    show_root = false,
+                },
+                neo_tree = {
+                    enabled = false,
+                },
+                telescope = {
+                    enabled = true,
+                    nvchad_like = true,
+                },
+            },
+        })
+        vim.cmd('colorscheme mellifluous')
     '';
-    
-    plugins = {
-      neorg = {
-        enable = true;
-        modules = {
-          "core.defaults" = { __empty = null; };
-          "core.dirman" = {
-            config = {
-              workspaces = {
-                home = "~/workspaces/org/home";
-                work = "~/workspaces/org/work";
-              };
-            };
-          };
-        };
-      };
-      lsp = {
-        enable = true;
-        servers = {
-          denols = {
-            enable = true;
-          };
-        };
-      };
 
-      harpoon = {
-        enable = true;
-        keymaps = {
-          addFile = "<leader>ha";
-          toggleQuickMenu = "<leader>hm";
-        };
-      };
-      telescope = {
-        enable = true;
-        defaults.file_ignore_patterns = [ "^.git/" ];
-      };
-
-      treesitter.enable = true;
-      clangd-extensions.enable = false;
-      nvim-autopairs = {
-        enable = true;
-        enableAfterQuote = true;
-        enableBracketInQuote = true;
-      };
-
-      nvim-cmp = {
-        enable = true;
-        autoEnableSources = true;
-        sources = [
-          { name = "nvim_lsp"; }
-          { name = "path"; }
-          { name = "buffer"; }
-        ];
-
-        mapping = {
-          "<CR>" = "cmp.mapping.confirm({ select = true })";
-          "<Tab>" = {
-            action = "cmp.mapping.select_next_item()";
-            modes = [ "i" "s" ];
-          };
-          "<C-c>" = "cmp.mapping.close()";
-        };
-      };
-    };
-
-    globals.mapleader = " ";
-    keymaps = [
-      {
-      action = "<cmd>Telescope find_files<CR>";
-      key = "<leader>ff";
-      }
-    ];
-    autoCmd = [{
-      event = [ "BufEnter" "BufWinEnter" ];
-      pattern = [ "*.c" "*.h" ];
-      command = "echo 'Abandon all hope ye who enter'";
-    }
-      ];
-
-    extraPlugins = with pkgs.vimPlugins; [
-      vim-nix
-      {
-        plugin = comment-nvim;
-        config = ''lua require("Comment").setup()'';
-      }
-    ];
   };
 }
