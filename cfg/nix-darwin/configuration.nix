@@ -25,7 +25,7 @@
     # makes builds slower, but I would forget otherwise
     onActivation.upgrade = true;
     # taps = [""];
-    casks = [  "alacritty" "amethyst" "discord" "spotify"  ];
+    casks = [  "alacritty" "amethyst" "discord" "spotify" "steam" ];
     brews = [ "emacs" "httpie" "tmux" "libtool" "cmake" "jq" "livekit" "foreman" "deno" ];
   };
 

@@ -4,8 +4,55 @@
     enable = true;
 
     plugins = {
-      rustaceanvim = {
+      todo-comments = {
         enable = true;
+        colors = {
+          error = [ "DiagnosticError" "ErrorMsg" "#DC2626" ];
+          warning = [ "DiagnosticWarn" "WarningMsg" "#FBBF24" ];
+          info = [ "DiagnosticInfo" "#DAA551" ];
+          hint = [ "DiagnosticHint" "#10B981" ];
+          default = [ "Identifier" "#7C3AED" ];
+          test = [ "Identifier" "#FF00FF" ];
+        };
+        keywords = {
+          FIX = {
+            icon = " "; # Icon used for the sign, and in search results.
+            color = "error"; # Can be a hex color, or a named color.
+            alt = [
+              "FIXME"
+              "BUG"
+              "FIXIT"
+              "ISSUE"
+            ]; # A set of other keywords that all map to this FIX keywords.
+          };
+          TODO = {
+            icon = " ";
+            color = "info";
+          };
+          HACK = {
+            icon = " ";
+            color = "warning";
+          };
+          WARN = {
+            icon = " ";
+            color = "warning";
+            alt = [ "WARNING" "XXX" ];
+          };
+          PERF = {
+            icon = " ";
+            alt = [ "OPTIM" "PERFORMANCE" "OPTIMIZE" ];
+          };
+          NOTE = {
+            icon = " ";
+            color = "hint";
+            alt = [ "INFO" ];
+          };
+          TEST = {
+            icon = "⏲ ";
+            color = "test";
+            alt = [ "TESTING" "PASSED" "FAILED" ];
+          };
+        };
       };
       neogen = {
         enable = true;
@@ -16,9 +63,7 @@
           generateType = "<leader>ngt";
         };
       };
-      gitsigns = {
-        enable = true;
-      };
+      gitsigns = { enable = true; };
       neorg = {
         enable = true;
         modules = {
@@ -41,7 +86,17 @@
       };
       lsp = {
         enable = true;
-        servers = { denols = { enable = true; }; };
+        servers = {
+          denols = { enable = true; };
+          rust-analyzer = {
+            enable = true;
+            installCargo = false;
+            installRustc = false;
+          };
+          tsserver = { enable = true; };
+          pylyzer = { enable = true; };
+          ruff-lsp = { enable = true; };
+        };
       };
       harpoon = {
         enable = true;
@@ -106,6 +161,9 @@
     extraConfigLua = ''
       local opt = vim.opt
 
+
+
+      -- TODO: break these settings into the 'options' field of nixvim
       opt.breakindent = true
       opt.clipboard = "unnamedplus"
       opt.hidden = true
@@ -354,10 +412,10 @@
                 status_line = false,
             },
             flat_background = {
-                line_numbers = false,
+                line_numbers = true,
                 floating_windows = false,
                 file_tree = false,
-                cursor_line_number = false,
+                cursor_line_number = true,
             },
             plugins = {
                 cmp = true,
