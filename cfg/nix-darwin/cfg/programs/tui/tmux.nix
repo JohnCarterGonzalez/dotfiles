@@ -5,13 +5,14 @@
     clock24 = true;
     baseIndex = 1;
     prefix = "C-z";
-    plugins = with pkgs.tmuxPlugins; [
-      sensible
-      yank
+    plugins = with pkgs; [
+      tmuxPlugins.sensible
+      tmuxPlugins.yank
+      tmuxPlugins.net-speed
+      tmuxPlugins.tmux-fzf
       {
-        plugin = kanagawa;
-        extraConfig =
-          "	set -g @kanagawa-show-battery false\n	set -g @kanagawa-show-powerline true\n	set -g @kanagawa-refresh-rate 10\n";
+      plugin = tmuxPlugins.resurrect;
+      extraConfig = "set -g @resurrect-strategy-nvim 'session'";
       }
     ];
     extraConfig = ''
@@ -45,6 +46,55 @@
       setw -g mode-style 'fg=colour1 bg=colour18 bold'
       # messages
       set -g message-style 'fg=colour2 bg=colour0 bold'
+      # Status {{{
+  # Colors {{{
+    set -g status-bg '#1c1c1c' # Using Mellifluous background
+    set -g status-fg '#dfdfaf' # Using Mellifluous foreground
+    set -g status-attr none
+  # }}}
+# }}}
+
+# Window {{{
+  # Format {{{
+    set -g window-status-separator " "
+    set -g window-status-format " #I:#W "
+    set -g window-status-current-format " #I:#W "
+  # }}}
+
+  # Style {{{
+    # For active window style, using Dark Red for bg to highlight
+    set -g window-status-current-style fg='#dfdfaf',bg='#875f5f',bold
+    # For other windows, using a soft grey to blend with the Mellifluous background
+    set -g window-status-style fg='#dfdfaf',bg='#1c1c1c',bold
+    set -g window-status-activity-style fg='#dfdfaf',bg='#1c1c1c',bold
+  # }}}
+# }}}
+
+# Panes {{{
+  set -g pane-border-bg '#1c1c1c'
+  set -g pane-border-fg '#dedcd6' # Slightly adjusted for visibility
+  set -g pane-active-border-bg '#1c1c1c'
+  set -g pane-active-border-fg '#dfdfaf' # Foreground color for contrast
+  set -g display-panes-colour '#dfdfaf'
+  set -g display-panes-active-colour '#dfdfaf'
+# }}}
+
+# Clock Mode {{{
+  setw -g clock-mode-colour '#dfdfaf'
+# }}}
+
+# Messages {{{
+  set -g message-fg '#dfdfaf'
+  set -g message-bg '#1c1c1c'
+  set -g message-command-fg '#dfdfaf'
+  set -g message-command-bg '#1c1c1c'
+# }}}
+
+# Mode (window select / session select) {{{
+  set-window-option -g mode-fg '#dfdfaf'
+  set-window-option -g mode-bg '#875f5f' # Dark Red for visibility
+# }}}
+
     '';
   };
 

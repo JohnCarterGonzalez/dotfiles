@@ -1,0 +1,5 @@
+[toolchain]
+channel = "1.75"
+profile = "minimal"
+components = [ "rustfmt", "clippy", "rust-analyzer", "rust-src" ]
+targets = [ "x86_64-apple-darwin", "aarch64-apple-darwin", "wasm32-wasi" ]

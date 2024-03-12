@@ -16,11 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-     emacs-overlay = {                                                     # Emacs Overlays
-        url = "github:nix-community/emacs-overlay";
-        flake = false;
-      };
-
     hardware.url = "github:nixos/nixos-hardware";
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -28,9 +23,10 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, nixvim, emacs-overlay, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-darwin, nixvim, ... }@inputs:
     let
       inherit (self) outputs;
+      # TODO: update to flake-utils
       # Supported systems for your flake packages, shell, etc.
       systems = [
         "aarch64-linux"

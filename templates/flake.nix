@@ -14,29 +14,17 @@
       ];
     in {
       templates = {
-        c_cpp = {
+        python = {
           description = ''
-            Basic flake for C/C++ development
+		Flake Template for developing Python Projects
           '';
-          path = ./c_cpp;
+          path = ./python;
         };
-        node = {
+        rust = {
           description = ''
-            Basic flake for node dev environment
+            Flake Template for developing Rust projects
           '';
-          path = ./node;
-        };
-        deno = {
-          description = ''
-            Basic flake for deno dev environment & build system
-          '';
-          path = ./deno;
-        };
-        jupyter-poetry = {
-          description = ''
-            Basic Flake for jupyter notebook projects using poetry
-          '';
-          path = ./jupyter-poetry;
+          path = ./rust;
         };
       };
       formatter =

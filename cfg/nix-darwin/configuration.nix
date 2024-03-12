@@ -1,5 +1,5 @@
 { pkgs, lib, inputs, ... }: {
-  imports = [ ./editor ];
+  #imports = [ ./editor ];
   environment.systemPackages = with pkgs; [
     nix-direnv
     nixfmt
@@ -21,12 +21,10 @@
   nix.package = pkgs.nix;
   homebrew = {
     enable = true;
-    # updates homebrew packages on activation,
-    # makes builds slower, but I would forget otherwise
     onActivation.upgrade = true;
     # taps = [""];
-    casks = [  "alacritty" "amethyst" "discord" "spotify" "steam" ];
-    brews = [ "emacs" "httpie" "tmux" "libtool" "cmake" "jq" "livekit" "foreman" "deno" ];
+    casks = [  "alacritty" "amethyst" "discord" "steam" ];
+    brews = [ "httpie" "libtool" "cmake" "jq" "livekit" "foreman" ];
   };
 
   # Necessary for using flakes on this system.

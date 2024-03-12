@@ -5,6 +5,7 @@
 
   outputs = { nixpkgs, ... }:
     let
+      # TODO: update to flake-utils
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-linux"
         "i686-linux"
