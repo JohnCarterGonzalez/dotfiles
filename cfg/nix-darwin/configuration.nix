@@ -1,5 +1,5 @@
 { pkgs, lib, inputs, ... }: {
-  #imports = [ ./editor ];
+  imports = [ ./editor ];
   environment.systemPackages = with pkgs; [
     nix-direnv
     nixfmt

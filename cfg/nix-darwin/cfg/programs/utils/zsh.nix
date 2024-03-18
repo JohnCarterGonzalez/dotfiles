@@ -4,7 +4,7 @@
       enable = true;
       shellAliases = {
         VIS="cd ~/workspaces/projects/work/python/cert_vision/";
-        SCR="cd ~/workspaces/projects/work/python/scraper/";
+        beaut="cd ~/workspaces/projects/work/python/scraper/";
         deeno="cd ~/workspaces/projects/work/deno/";
         pypypy="cd ~/workspaces/projects/work/python/";
         ls = "eza -la";

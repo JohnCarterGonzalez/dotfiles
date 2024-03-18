@@ -21,12 +21,6 @@
           '';
           path = ./cfg;
         };
-        flake-templates = {
-          description = ''
-            Flake templates for package development or development environments.
-            '';
-          path = ./templates;
-        };
       };
       formatter =
         forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
