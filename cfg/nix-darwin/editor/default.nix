@@ -167,7 +167,7 @@
     action = "<cmd>Telescope find_files<CR>";
     key = "<leader>ff";
   }];
-  extraConfigLua = ''
+  extraConfigLuaPost = ''
     local opt = vim.opt
 
 
