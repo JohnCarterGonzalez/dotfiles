@@ -3,6 +3,7 @@
   programs.zsh = {
       enable = true;
       shellAliases = {
+        rusty="cd ~/workspaces/projects/hobby_lobby/rust/";
         VIS="cd ~/workspaces/projects/work/python/cert_vision/";
         beaut="cd ~/workspaces/projects/work/python/scraper/";
         deeno="cd ~/workspaces/projects/work/deno/";

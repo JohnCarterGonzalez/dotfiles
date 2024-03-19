@@ -24,7 +24,7 @@
     onActivation.upgrade = true;
     # taps = [""];
     casks = [  "alacritty" "amethyst" "discord" "steam" ];
-    brews = [ "httpie" "libtool" "cmake" "jq" "livekit" "foreman" ];
+    brews = [ "httpie" "libtool" "cmake" "jq" "livekit" "foreman" "cocoapods" ];
   };
 
   # Necessary for using flakes on this system.
