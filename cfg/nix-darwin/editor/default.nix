@@ -2,6 +2,12 @@
 
   programs.nixvim = {
     enable = true;
+    colorschemes = {
+      kanagawa = {
+        enable = false;
+        theme = "dragon";
+      };
+    };
 
     plugins = {
       todo-comments = {
@@ -111,7 +117,6 @@
         };
 
       };
-
       harpoon = {
         enable = true;
         keymaps = {
@@ -126,6 +131,7 @@
 
       treesitter.enable = true;
       treesitter-context.enable = true;
+      clangd-extensions.enable = true;
       nvim-autopairs = {
         enable = true;
         enableAfterQuote = true;
@@ -134,6 +140,7 @@
 
       cmp = {
         enable = true;
+        autoEnableSources = false;
         settings = {
           mapping = {
             __raw = ''
@@ -146,28 +153,33 @@
               })
             '';
           };
+          snippet = { expand = "luasnip"; };
           sources = {
             __raw = ''
               cmp.config.sources({
                 { name = 'nvim_lsp' },
-                { name = 'path' },
+                { name = 'vsnip' },
                 -- { name = 'luasnip' },
+                -- { name = 'ultisnips' },
+                -- { name = 'snippy' },
               }, {
                 { name = 'buffer' },
               })
             '';
           };
         };
+
       };
     };
+
     extraPlugins = with pkgs;
       [
         (vimUtils.buildVimPlugin {
-          name = "modus-themes";
+          name = "mellifluous";
           src = pkgs.fetchFromGitHub {
-            owner = "miikanissi";
-            repo = "modus-themes.nvim";
-            rev = "71fd92fb7b606af51b48b0cffceba8193e2e8713";
+            owner = "ramojus";
+            repo = "mellifluous.nvim";
+            rev = "42ccf800b96b4ff401506c3eebabea1975cf2d4b";
             hash = "sha256-uRBAiPHr0+fundLShIvjdyGsA4gPNcUloY79fQ9aGxg=";
           };
         })
@@ -180,6 +192,8 @@
     }];
     extraConfigLua = ''
       local opt = vim.opt
+
+
 
       -- TODO: break these settings into the 'options' field of nixvim
       opt.breakindent = true
@@ -400,26 +414,59 @@
       )
 
       -- Colorscheme
-        require("modus-themes").setup({
-	style = "modus_vivendi",
-	variant = "default", -- Theme comes in four variants `default`, `tinted`, `deuteranopia`, and `tritanopia`
-	transparent = false, -- Transparent background (as supported by the terminal)
-	dim_inactive = false, -- "non-current" windows are dimmed
-	styles = {
-		comments = { italic = true },
-		keywords = { italic = true },
-		functions = {},
-		variables = {},
-	},
-
-	---@param colors ColorScheme
-	on_colors = function(colors) end,
-
-	---@param highlights Highlights
-	---@param colors ColorScheme
-	on_highlights = function(highlights, colors) end,
-})
+      require 'mellifluous'.setup({
+            dim_inactive = false,
+            color_set = 'mellifluous',
+            styles = { -- see :h attr-list for options. set {} for NONE, { option = true } for option
+                comments = { italic = true },
+                conditionals = {},
+                folds = {},
+                loops = {},
+                functions = {},
+                keywords = {},
+                strings = {},
+                variables = {},
+                numbers = {},
+                booleans = {},
+                properties = {},
+                types = {},
+                operators = {},
+                markup = {
+                    headings = { bold = true },
+                },
+            },
+            transparent_background = {
+                enabled = false,
+                floating_windows = true,
+                telescope = true,
+                file_tree = true,
+                cursor_line = true,
+                status_line = false,
+            },
+            flat_background = {
+                line_numbers = true,
+                floating_windows = false,
+                file_tree = false,
+                cursor_line_number = true,
+            },
+            plugins = {
+                cmp = true,
+                gitsigns = true,
+                indent_blankline = false,
+                nvim_tree = {
+                    enabled = false,
+                    show_root = false,
+                },
+                neo_tree = {
+                    enabled = false,
+                },
+                telescope = {
+                    enabled = true,
+                    nvchad_like = true,
+                },
+            },
+        })
+        vim.cmd[[colorscheme mellifluous]]
     '';
   };
-
 }
