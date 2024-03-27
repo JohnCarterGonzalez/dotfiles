@@ -99,7 +99,7 @@
             installCargo = false;
             installRustc = false;
           };
-          pylyzer = { enable = true; };
+          pyright = { enable = true; };
           ruff-lsp = { enable = true; };
         };
         keymaps = {
@@ -113,6 +113,7 @@
             gd = "definition";
             gi = "implementation";
             gt = "type_definition";
+            ca = "code_action";
           };
         };
 
