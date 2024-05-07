@@ -1,3 +1,3 @@
 { pkgs, ... }: {
-  imports = [  ./starship.nix ];
+  imports = [  ./wezterm.nix ./tmux.nix ];
 }

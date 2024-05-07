@@ -6,12 +6,11 @@
   pkgs,
   ...
 }: {
-  imports = [ 
-    ../common
-    ./features 
+  imports = [
+    ./features
     inputs.nixvim.homeManagerModules.nixvim
   ];
-nixpkgs = {
+  nixpkgs = {
     config = {
       allowUnfree = true;
       allowUnfreePredicate = true;
