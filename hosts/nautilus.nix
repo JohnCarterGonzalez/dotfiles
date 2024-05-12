@@ -22,6 +22,9 @@
 };
 nixpkgs = {
     config = {
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "vagrant"
+      ];
       allowUnfree = true;
     };
   };
@@ -43,6 +46,7 @@ nixpkgs = {
   };
 
   environment.systemPackages = with pkgs; [
+    google-chrome
     libreoffice
     rustup
     vulkan-tools
@@ -57,6 +61,7 @@ nixpkgs = {
     gnumake
     nix-direnv
     busybox
+    virtualbox
   ];
 
 
@@ -64,22 +69,27 @@ nixpkgs = {
 
   boot = {
   	loader.systemd-boot.enable = true;
+        kernelModules = [ "kvm-amd" "kvm-intel" ];
 	initrd.kernelModules = ["amdgpu"];
 	};
 
-  users.users = {
+        users = {
+          extraGroups.vboxusers.members = [ "cpt_n3m0" ];
+          users = {
     cpt_n3m0 = {
       initialPassword = "rootroot";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
       ];
-      extraGroups = [ "networkmanager" "audio" "docker" "sound" "tty" "wheel"];
+      extraGroups = [ "qemu-libvirtd" "libvirtd" "disk" "networkmanager" "audio" "docker" "sound" "tty" "wheel"];
     };
   };
+};
 
   hardware = {
   	system76.enableAll = true;
   };
+
 
 
   security.rtkit.enable = true;

@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }: {
 
+  home.packages = with pkgs; [
+    lua54Packages.lua-utils-nvim
+  ];
+
   programs.nixvim = {
     enable = true;
     extraConfigLua = ''
@@ -21,6 +25,14 @@
     plugins = {
       lualine = {
         enable = true;
+        componentSeparators = {
+          left = "|";
+          right = "|";
+        };
+        sectionSeparators = {
+          left = "";
+          right = "";
+        };
       };
       nvim-autopairs = {
         enable = true;
@@ -31,15 +43,30 @@
       nix = {
         enable = true;
       };
+      # TODO: configure
+      neotest = {
+        enable = true;
+      };
+      neoscroll = {
+        enable = true;
+      };
+      neogit = {
+        enable = true;
+        settings = {
+          auto_refresh = true;
+          commit_editor.kind = "tab";
+        };
+      };
       neorg = {
         enable = true;
+        lazyLoading = true;
         modules = {
           "core.defaults" = { __empty = null; };
           "core.dirman" = {
             config = {
               workspaces = {
-                home = "~/workspaces/org/home";
-                work = "~/workspaces/org/work";
+                home = "~/workspaces/mm/home";
+                work = "~/workspaces/mm/work";
               };
             };
           };
@@ -53,6 +80,9 @@
           addFile = "<leader>ha";
           toggleQuickMenu = "<leader>hm";
         };
+      };
+      todo-comments = {
+        enable = true;
       };
       telescope = {
         enable = true;

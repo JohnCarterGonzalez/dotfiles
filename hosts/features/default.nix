@@ -6,5 +6,6 @@
     ./bluetooth.nix
     ./pulseaudio.nix
     ./gpu.nix
+    ./virt-man.nix
   ];
 }
