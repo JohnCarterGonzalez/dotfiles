@@ -4,6 +4,5 @@
       enable = true;
       git = true;
       icons = true;
-      enableFishIntegration = true;
   };
 }

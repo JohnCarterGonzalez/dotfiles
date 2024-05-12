@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }: {
+{ inputs, outputs, pkgs, lib, config, ... }: {
   environment.systemPackages = with pkgs; [
     ghidra
     nix-direnv

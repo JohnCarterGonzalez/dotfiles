@@ -1,8 +1,8 @@
 { pkgs, ...}:
 {
 	imports = [
-					../common
           ./tui
           ./utils
+	  ./editor
 	];
 }

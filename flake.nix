@@ -2,10 +2,9 @@
   description = "Your new nix config";
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    hardware.url = "github:nixos/nixos-hardware";
 
-    # Home manager
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs"; };
@@ -15,7 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hardware.url = "github:nixos/nixos-hardware";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,21 +48,24 @@
       };
     };
 
-    # TODO: add darwin config
     # Available through 'darwin-rebuild switch --flake .#MBP-work'
-      darwinConfigurations."MBP-work" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = { inherit inputs outputs; };
-        modules = [
-          ./darwin
-          nixvim.nixDarwinModules.nixvim
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.johngonzalez = import ./home/mbp-work;
-          }
-        ];
+    darwinConfigurations."MBP-work" = nix-darwin.lib.darwinSystem {
+  system = "aarch64-darwin";
+  specialArgs = { inherit inputs outputs; };
+  modules = [
+    ./darwin/configuration.nix
+    nixvim.nixDarwinModules.nixvim
+    home-manager.darwinModules.home-manager
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users.johngonzalez = import ./home/mbp-work/home.nix {
+        inherit inputs outputs;
+        inherit (nixpkgs) lib;
+        inherit (config) config pkgs;
       };
+    }
+  ];
+};
     };
 }
