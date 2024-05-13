@@ -38,34 +38,34 @@
       formatter =
         forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    # Available through 'nixos-rebuild --flake .#nautilus'
-    nixosConfigurations = {
-      nautilus = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-	./hosts/nautilus.nix
-	];
+      # Available through 'nixos-rebuild --flake .#nautilus'
+      nixosConfigurations = {
+        nautilus = nixpkgs.lib.nixosSystem {
+          specialArgs = {inherit inputs outputs;};
+          modules = [
+          ./hosts/nautilus
+          ];
+        };
       };
-    };
 
-    # Available through 'darwin-rebuild switch --flake .#MBP-work'
-    darwinConfigurations."MBP-work" = nix-darwin.lib.darwinSystem {
-  system = "aarch64-darwin";
-  specialArgs = { inherit inputs outputs; };
-  modules = [
-    ./darwin/configuration.nix
-    nixvim.nixDarwinModules.nixvim
-    home-manager.darwinModules.home-manager
-    {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.users.johngonzalez = import ./home/mbp-work/home.nix {
-        inherit inputs outputs;
-        inherit (nixpkgs) lib;
-        inherit (config) config pkgs;
+      # Available through 'darwin-rebuild switch --flake .#MBP-work'
+      darwinConfigurations."MBP-work" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs outputs; };
+        modules = [
+          ./darwin
+          nixvim.nixDarwinModules.nixvim
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.johngonzalez = import ./home/mbp-work {
+              inherit inputs outputs;
+              inherit (nixpkgs) lib;
+              inherit (config) config pkgs;
+            };
+          }
+        ];
       };
-    }
-  ];
-};
     };
 }
