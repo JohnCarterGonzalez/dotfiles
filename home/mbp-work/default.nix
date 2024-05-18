@@ -7,8 +7,9 @@
   ...
 }: {
   imports = [
-    ./features
     inputs.nixvim.homeManagerModules.nixvim
+    ../common
+    ./features
   ];
   nixpkgs = {
     config = {

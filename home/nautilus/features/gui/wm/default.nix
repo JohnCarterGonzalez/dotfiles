@@ -17,7 +17,7 @@ xsession.windowManager.i3 = {
       bars = [
         {
           position = "top";
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
         }
       ];
     };

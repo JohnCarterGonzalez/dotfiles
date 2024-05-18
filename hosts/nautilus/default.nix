@@ -17,9 +17,10 @@
  home-manager = {
 	extraSpecialArgs = { inherit inputs outputs; };
 	users = {
-		cpt_n3m0 = import ../home/nautilus;
+		cpt_n3m0 = import ../../home/nautilus;
 	};
 };
+
 nixpkgs = {
     config = {
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
