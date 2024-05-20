@@ -3,7 +3,7 @@
 xsession.windowManager.i3 = {
     enable = true;
     extraConfig = ''
-    	exec_always feh --bg-fill /home/cpt_n3m0/.cfg/assets/wp/road_dark_green.jpg
+    	exec_always feh --bg-fill /home/cpt_n3m0/.cfg/assets/wp/japanese_store.jpg
         exec --no-startup-id picom -c
 
         gaps inner 3

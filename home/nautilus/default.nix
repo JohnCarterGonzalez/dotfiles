@@ -31,17 +31,12 @@
   stateVersion = "23.11";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-
 
   # Enable home-manager and git
   programs = {
-  home-manager.enable = true;
-  git.enable = true;
+    home-manager.enable = true;
   };
 
-  # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
 }

@@ -19,6 +19,7 @@
 	users = {
 		cpt_n3m0 = import ../../home/nautilus;
 	};
+        backupFileExtension = "backup";
 };
 
 nixpkgs = {
@@ -48,8 +49,6 @@ nixpkgs = {
 
   environment.systemPackages = with pkgs; [
     google-chrome
-    libreoffice
-    rustup
     vulkan-tools
     vulkan-loader
     discord
@@ -62,7 +61,6 @@ nixpkgs = {
     gnumake
     nix-direnv
     busybox
-    virtualbox
   ];
 
 
@@ -75,7 +73,6 @@ nixpkgs = {
 	};
 
         users = {
-          extraGroups.vboxusers.members = [ "cpt_n3m0" ];
           users = {
     cpt_n3m0 = {
       initialPassword = "rootroot";

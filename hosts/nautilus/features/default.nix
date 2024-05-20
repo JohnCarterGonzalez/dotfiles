@@ -7,5 +7,6 @@
     ./pulseaudio.nix
     ./gpu.nix
     ./virt-manager.nix
+    ./zsh.nix
   ];
 }
