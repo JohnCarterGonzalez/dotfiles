@@ -3,7 +3,7 @@
    programs.git = {
     enable = true;
     userName  = "cpt_n3m0";
-    userEmail = "johncarter@gonzalez.codes";
+    userEmail = "public@email.com";
     aliases = {
       gs = "status";
       ga = "git add";
