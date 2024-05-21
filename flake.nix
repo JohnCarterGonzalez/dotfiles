@@ -53,7 +53,7 @@
         system = "aarch64-darwin";
         specialArgs = { inherit inputs outputs; };
         modules = [
-          ./darwin
+          ./hosts/darwin
           nixvim.nixDarwinModules.nixvim
           home-manager.darwinModules.home-manager
           {

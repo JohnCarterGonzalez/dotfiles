@@ -1,6 +1,5 @@
 { inputs, outputs, pkgs, lib, config, ... }: {
   environment.systemPackages = with pkgs; [
-    ghidra
     nix-direnv
     nixfmt
     tree
@@ -24,8 +23,8 @@
   homebrew = {
     enable = true;
     onActivation.upgrade = true;
-    casks = [  "obs" "discord" "alfred"];
-    brews = [  "tmux" "exercism" "lazygit" "ack" "qemu" "fish" "solargraph" "pyright" "coreutils" "libtool" "cmake" "jq" "livekit" "foreman"  ];
+    casks = [  "obs" "discord" ];
+    brews = [  "tmux"  "lazygit" "ack" "qemu" "pyright" "coreutils" "libtool" "cmake" "jq" "livekit" "foreman"  ];
   };
 
   # Necessary for using flakes on this system.
