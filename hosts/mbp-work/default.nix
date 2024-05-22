@@ -1,5 +1,6 @@
 { inputs, outputs, pkgs, lib, config, ... }: {
   environment.systemPackages = with pkgs; [
+    devenv
     nix-direnv
     tree
     eza
@@ -20,12 +21,13 @@
   homebrew = {
     enable = true;
     onActivation.upgrade = true;
-    casks = [  "obs" "discord" ];
+    casks = [  "firefox" "obs" "discord" ];
     brews = [  "tmux"  "lazygit" "ack" "qemu" "pyright" "coreutils" "libtool" "cmake" "jq" "livekit" "foreman"  ];
   };
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
+  programs.zsh.enable = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -33,7 +35,7 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
-  users.users.johngonzalez = {
+  users.users.johncartergonzalez = {
     name = "johncartergonzalez";
     home = "/Users/johncartergonzalez";
   };
