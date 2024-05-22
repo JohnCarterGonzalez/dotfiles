@@ -1,7 +1,6 @@
 { inputs, outputs, pkgs, lib, config, ... }: {
   environment.systemPackages = with pkgs; [
     nix-direnv
-    nixfmt
     tree
     eza
     tmux
@@ -9,8 +8,6 @@
     supabase-cli
     bat
     gotop
-    poetry
-    rustup
   ];
 
   fonts = {
@@ -37,7 +34,7 @@
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
   users.users.johngonzalez = {
-    name = "johngonzalez";
-    home = "/Users/johngonzalez";
+    name = "johncartergonzalez";
+    home = "/Users/johncartergonzalez";
   };
 }

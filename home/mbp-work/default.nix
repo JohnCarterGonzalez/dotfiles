@@ -19,8 +19,8 @@
   };
 
   home = {
-    username = "johngonzalez";
-    homeDirectory = "/Users/johngonzalez";
+    username = "johncartergonzalez";
+    homeDirectory = "/Users/johncartergonzalez";
   };
 
   programs = {
