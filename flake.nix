@@ -1,5 +1,5 @@
 {
-  description = "Your new nix config";
+  description = "Nix config for neto";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -34,9 +34,10 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in {
       packages =
-        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system}.alejandra);
       formatter =
         forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+
 
       # Available through 'nixos-rebuild --flake .#nautilus'
       nixosConfigurations = {
@@ -53,13 +54,13 @@
         system = "aarch64-darwin";
         specialArgs = { inherit inputs outputs; };
         modules = [
-          ./darwin
+          ./hosts/mbp-work
           nixvim.nixDarwinModules.nixvim
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.johngonzalez = import ./home/mbp-work {
+            home-manager.users.johncartergonzalez = import ./home/mbp-work {
               inherit inputs outputs;
               inherit (nixpkgs) lib;
               inherit (config) config pkgs;

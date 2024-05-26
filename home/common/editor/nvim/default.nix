@@ -1,11 +1,8 @@
 { config, pkgs, lib, ... }: {
 
-  home.packages = with pkgs; [
-    lua54Packages.lua-utils-nvim
-  ];
-
   programs.nixvim = {
     enable = true;
+    defaultEditor = true;
     extraConfigLua = ''
       local api = vim.api
 
@@ -58,7 +55,7 @@
         };
       };
       neorg = {
-        enable = true;
+        enable = false;
         lazyLoading = true;
         modules = {
           "core.defaults" = { __empty = null; };
@@ -72,7 +69,124 @@
           };
         };
       };
-      lsp.enable = true;
+      rest = {
+        enable = false;
+        settings = {
+          client = "curl";
+          env_file = ".env";
+          keybinds = [
+            [
+              "<localleader>rr"
+              "<cmd>Rest run<cr>"
+              "Run request under the cursor"
+            ]
+            [
+              "<localleader>rl"
+              "<cmd>Rest run last<cr>"
+              "Re-run latest request"
+            ]
+          ];
+          logs = {
+            level = "info";
+            save = true;
+          };
+          result = {
+            split = {
+              horizontal = false;
+              in_place = false;
+              stay_in_current_window_after_split = true;
+            };
+          };
+        };
+      };
+
+      lsp = {
+        enable = true;
+        servers = {
+          ccls = {
+            enable = true;
+          };
+
+          phpactor = {
+            enable = true;
+            autostart = true;
+          };
+
+          pylyzer = {
+            enable = true;
+            autostart = true;
+          };
+
+          ruff-lsp = {
+            enable = true;
+          };
+
+          tsserver = {
+            enable = true;
+          };
+        };
+      };
+      lspkind = {
+        enable = true;
+      };
+
+      cmp = {
+        enable = true;
+        autoEnableSources = true;
+        settings = {
+          completion = {
+            keyword_length = 3;
+          };
+          snippets = {
+            expand = ''
+            function(args)
+              require('luasnip').lsp_expand(args.body)
+            end
+            '';
+          };
+        };
+        cmdline = {
+          "/" = {
+            mapping = {
+              __raw = "cmp.mapping.preset.cmdline()";
+            };
+            sources = [
+              {
+                name = "buffer";
+              }
+            ];
+          };
+          ":" = {
+            mapping = {
+              __raw = "cmp.mapping.preset.cmdline()";
+            };
+            sources = [
+              {
+                name = "path";
+              }
+              {
+                name = "cmdline";
+                option = {
+                  ignore_cmds = [
+                    "Man"
+                    "!"
+                  ];
+                };
+              }
+            ];
+          };
+        };
+      };
+
+      cmp-async-path.enable = true;
+      cmp-buffer.enable = true;
+      cmp-nvim-lsp.enable = true;
+      cmp-nvim-lua.enable = true;
+      cmp_luasnip.enable = true;
+
+      luasnip = {
+        enable = true;
+      };
 
       harpoon = {
         enable = true;
@@ -91,8 +205,87 @@
 	};
       };
 
-      oil.enable = true;
-      treesitter.enable = true;
+      oil = {
+        enable = true;
+        settings = {
+          columns = [
+            "icon"
+            "size"
+            "permission"
+          ];
+          keymaps = {
+            "<C-c>" = false;
+            "<C-l>" = false;
+            "<C-r>" = "actions.refresh";
+            "<leader>qq" = "actions.close";
+            "y." = "actions.copy_entry_path";
+          };
+          skip_confirm_for_simple_edits = true;
+          view_options = {
+            show_hidden = true;
+          };
+          win_options = {
+            concealcursor = "ncv";
+            conceallevel = 3;
+            cursorcolumn = false;
+            foldcolumn = "0";
+            list = false;
+            signcolumn = "no";
+            spell = false;
+            wrap = false;
+          };
+        };
+      };
+
+      treesitter = {
+        enable = true;
+        ensureInstalled = [ "python" "c" "javascript" "php" "rust" "nix" "lua" "sql" ];
+        folding = false;
+        indent = true;
+        nixGrammars = true;
+        nixvimInjections = true;
+      };
+
+      treesitter-context = {
+        enable = true;
+        settings = {
+          line_numbers = true;
+          max_lines = 0;
+          min_window_height = 0;
+          mode = "topline";
+          multiline_threshold = 20;
+          separator = "-";
+          trim_scope = "inner";
+          zindex = 20;
+        };
+      };
+
+      treesitter-refactor = {
+        enable = true;
+        highlightDefinitions.enable = true;
+        navigation = {
+          enable = true;
+          keymaps = {
+            gotoDefinition = "gtd";
+            gotoNextUsage = "gt;";
+            gotoPreviousUsage = "gt:";
+            listDefinitionsToc = "gtL";
+          };
+        }; 
+      };
+
+      treesitter-textobjects = {
+        enable = true;
+        lspInterop = {
+          enable = true;
+          border = "rounded";
+        };
+      };
+
+      trouble = {
+        enable = true;
+      };
+
       clangd-extensions.enable = true;
     };
 
