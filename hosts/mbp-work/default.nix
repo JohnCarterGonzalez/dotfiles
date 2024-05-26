@@ -21,8 +21,8 @@
   homebrew = {
     enable = true;
     onActivation.upgrade = true;
-    casks = [  "firefox" "obs" "discord" ];
-    brews = [  "tmux"  "lazygit" "ack" "qemu" "pyright" "coreutils" "libtool" "cmake" "jq" "livekit" "foreman"  ];
+    casks = [  "amethyst" "firefox" "obs" "discord" ];
+    brews = [   "tmux"  "lazygit" "ack" "qemu" "pyright" "coreutils" "libtool" "cmake" "jq" "livekit" "foreman"  ];
   };
 
   # Necessary for using flakes on this system.
