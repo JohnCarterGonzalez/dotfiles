@@ -7,10 +7,29 @@
       enable = true;
     };
     syntaxHighlighting.enable = true;
+    initExtra = ''
+      eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
+    '';
 
     shellAliases = {
-      ll = "eza -la";
+      ## SYS
       nix-update = "sudo nixos-rebuild switch --flake ~/.cfg/.#nautilus";
+      soc-update = "sudo nixos-rebuild switch --flake ~/.cfg/.#vaticant";
+
+      ll = "eza -la";
+      cd = "z";
+      zz = "z -";
+
+      ## GIT
+      gi = "git init";
+      gs = "status";
+      ga = "git add";
+      gcm = "git commit -m";
+      gsc = "git switch -c";
+      gf = "git fetch";
+      gpl = "git pull";
+      gp = "git push";
+      gra = "git remote add origin";
     };
 
     history = {
