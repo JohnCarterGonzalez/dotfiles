@@ -56,11 +56,8 @@ nixpkgs = {
     tree
     unzip
     neofetch
-    libgcc
-    cmake
-    gnumake
     nix-direnv
-    busybox
+    devenv
   ];
 
 
