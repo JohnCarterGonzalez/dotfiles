@@ -102,6 +102,16 @@
 
       lsp = {
         enable = true;
+        keymaps = {
+          lspBuf = {
+            ca = "code_action";
+              K = "hover";
+              gD = "references";
+              gd = "definition";
+              gi = "implementation";
+              gt = "type_definition";
+          };
+        };
         servers = {
           ccls = {
             enable = true;
