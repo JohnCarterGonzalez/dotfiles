@@ -13,6 +13,7 @@
 
       nix-update = "sudo nixos-rebuild switch --flake ~/.cfg/.#nautilus";
       darwin-update = "darwin-rebuild switch --flake ~/.cfg/.#MBP-work";
+      composer-up = "nix-shell -p php83Packages.composer";
 
       nvm = "nvim";
 
