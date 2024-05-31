@@ -17,6 +17,7 @@
               false
       )
       vim.cmd.colorscheme("gruvbuddy")
+
     '';
     
     plugins = {
@@ -102,6 +103,16 @@
 
       lsp = {
         enable = true;
+        keymaps = {
+          lspBuf = {
+            gr = "references";
+            gd = "definition";
+            gi = "implementation";
+            gt = "type_definition";
+            ca = "code_action";
+            K = "hover";
+          };
+        };
         servers = {
           ccls = {
             enable = true;
@@ -296,10 +307,12 @@
       shiftwidth = 2;
     };
 
-    keymaps = [{
+    keymaps = [
+      {
       action = "<cmd>Telescope find_files<CR>";
       key = "<leader>ff";
-    }];
+      }
+  ];
     autoCmd = [{
       event = [ "BufEnter" "BufWinEnter" ];
       pattern = [ "*.c" "*.h" ];

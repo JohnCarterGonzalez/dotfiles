@@ -48,6 +48,7 @@ nixpkgs = {
   };
 
   environment.systemPackages = with pkgs; [
+    jetbrains.phpstorm
     google-chrome
     vulkan-tools
     vulkan-loader
