@@ -12,7 +12,7 @@ extraConfig = ''
           window_decorations = "RESIZE",
           -- Treat left Alt as Meta
           send_composed_key_when_left_alt_is_pressed = true,
-          window_background_opacity = 0.9,
+          window_background_opacity = 1.0,
 
           -- Optionally, do the same for right Alt if you use it
           send_composed_key_when_right_alt_is_pressed = true,

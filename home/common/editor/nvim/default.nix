@@ -105,12 +105,21 @@
         enable = true;
         keymaps = {
           lspBuf = {
+<<<<<<< HEAD
             gr = "references";
             gd = "definition";
             gi = "implementation";
             gt = "type_definition";
             ca = "code_action";
             K = "hover";
+=======
+            ca = "code_action";
+              K = "hover";
+              gD = "references";
+              gd = "definition";
+              gi = "implementation";
+              gt = "type_definition";
+>>>>>>> 732ecd8378b49b4e3f7658138fa85e932d77bfc3
           };
         };
         servers = {
