@@ -1,5 +1,4 @@
-{ config, pkgs, lib, ... }: {
-
+{ pkgs, ... }: {
   imports = [
     ./lsp
     ./tree-sitter
@@ -9,6 +8,7 @@
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
+    viAlias = true;
     extraConfigLua = ''
       local api = vim.api
 
@@ -25,7 +25,7 @@
       vim.cmd.colorscheme("gruvbuddy")
 
     '';
-    
+
     plugins = {
       lualine = {
         enable = true;
@@ -47,7 +47,6 @@
       nix = {
         enable = true;
       };
-      # TODO: configure
 
       harpoon = {
         enable = true;
@@ -61,9 +60,9 @@
       };
       telescope = {
         enable = true;
-	settings = {
-        defaults.file_ignore_patterns = [ "^.git/" ];
-	};
+        settings = {
+          defaults.file_ignore_patterns = [ "^.git/" ];
+        };
       };
 
       oil = {
@@ -98,9 +97,6 @@
         };
       };
 
-
-
-
       trouble = {
         enable = true;
       };
@@ -117,15 +113,21 @@
 
     keymaps = [
       {
-      action = "<cmd>Telescope find_files<CR>";
-      key = "<leader>ff";
+        action = "<cmd>Telescope find_files<CR>";
+        key = "<leader>ff";
       }
-  ];
-    autoCmd = [{
-      event = [ "BufEnter" "BufWinEnter" ];
-      pattern = [ "*.c" "*.h" ];
-      command = "echo 'Abandon all hope ye who enter'";
-    }];
+      {
+        action = "<cmd>Oil<CR>";
+        key = "<leader>fd";
+      }
+    ];
+    autoCmd = [
+      {
+        event = [ "BufEnter" "BufWinEnter" ];
+        pattern = [ "*.c" "*.h" ];
+        command = "echo 'Abandon all hope ye who enter'";
+      }
+    ];
     extraPlugins = with pkgs.vimPlugins; [
       colorbuddy-nvim
     ];

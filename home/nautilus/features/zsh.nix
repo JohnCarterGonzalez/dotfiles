@@ -1,5 +1,7 @@
-{pkgs, config, ...}:
-{
+{ pkgs
+, config
+, ...
+}: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -12,17 +14,19 @@
     '';
 
     shellAliases = {
-      ## SYS
       nix-update = "sudo nixos-rebuild switch --flake ~/.cfg/.#nautilus";
-      soc-update = "sudo nixos-rebuild switch --flake ~/.cfg/.#vaticant";
+      darwin-update = "darwin-rebuild switch --flake ~/.cfg/.#MBP-work";
+      composer-up = "nix-shell -p php83Packages.composer";
 
-      ll = "eza -la";
-      cd = "z";
-      zz = "z -";
+      tn = "tmux new-session -s";
+      ta = "tmux a -t";
+      tk = "tmux kill-session -t";
 
-      ## GIT
-      gi = "git init";
-      gs = "status";
+      di = "devenv init";
+      ds = "devenv shell";
+      dup = "devenv up";
+
+      gs = "git status";
       ga = "git add";
       gcm = "git commit -m";
       gsc = "git switch -c";
@@ -30,6 +34,10 @@
       gpl = "git pull";
       gp = "git push";
       gra = "git remote add origin";
+
+      ll = "eza -la";
+      cd = "z";
+      zz = "z -";
     };
 
     history = {

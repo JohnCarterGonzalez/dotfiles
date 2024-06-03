@@ -49,6 +49,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    docker-compose
     google-chrome
     vulkan-tools
     vulkan-loader
@@ -74,9 +75,7 @@
       cpt_n3m0 = {
         initialPassword = "rootroot";
         isNormalUser = true;
-        openssh.authorizedKeys.keys = [
-        ];
-        extraGroups = [ "qemu-libvirtd" "libvirtd" "disk" "networkmanager" "audio" "docker" "sound" "tty" "wheel" ];
+        extraGroups = [ "docker" "qemu-libvirtd" "libvirtd" "disk" "networkmanager" "audio" "sound" "tty" "wheel" ];
       };
     };
   };
