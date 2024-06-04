@@ -32,6 +32,14 @@ for package in "${packages[@]}"; do
     fi
 done
 
+# Install Filament package separately due to specific version and options
+if composer show filament/filament > /dev/null 2>&1; then
+    echo "filament/filament is already installed, skipping."
+else
+    echo "Installing filament/filament..."
+    composer require filament/filament:"^3.2" -W || error_exit "Failed to add package: filament/filament"
+fi
+
 echo "Running additional Laravel setup commands..."
 
 # Check if Horizon is installed and install if necessary
@@ -57,6 +65,17 @@ if ! php artisan vendor:publish --list | grep -q 'PulseServiceProvider'; then
 else
     echo "Pulse Service Provider is already published, skipping."
 fi
+
+# Check if Filament is installed and install if necessary
+if ! php artisan list | grep -q 'filament:install'; then
+    echo "Running: php artisan filament:install --panels"
+    php artisan filament:install --panels || error_exit "Failed to run: php artisan filament:install --panels"
+else
+    echo "Filament is already installed, skipping."
+fi
+
+echo "Wiping the Database with php artisan db:wipe'"
+php artisan db:wipe
 
 echo "Migrating a fresh database with 'php artisan migrate:fresh'"
 php artisan migrate:fresh
