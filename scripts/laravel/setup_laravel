@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+# Error handling
+set -euo pipefail
+
+# Function to print error messages
+error_exit() {
+    echo "$1" 1>&2
+    exit 1
+}
+
+# Get the directory of the current script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PARENT_DIR="$(dirname "$SCRIPT_DIR")"
+
+echo "Setting up Laravel dependencies..."
+
+# Change to the parent directory
+cd "$PARENT_DIR" || error_exit "Failed to change to parent directory: $PARENT_DIR"
+
+echo "Adding to composer.json:"
+
+declare -a packages=("laravel/pulse" "laravel/horizon" "laravel/breeze --dev" "laravel/pint --dev" "laravel/octane")
+
+for package in "${packages[@]}"; do
+    package_name=$(echo "$package" | cut -d' ' -f1)
+    if composer show "$package_name" > /dev/null 2>&1; then
+        echo "$package_name is already installed, skipping."
+    else
+        echo "Installing $package_name..."
+        composer require $package || error_exit "Failed to add package: $package"
+    fi
+done
+
+echo "Running additional Laravel setup commands..."
+
+# Check if Horizon is installed and install if necessary
+if ! php artisan list | grep -q 'horizon:install'; then
+    echo "Running: php artisan horizon:install"
+    php artisan horizon:install || error_exit "Failed to run: php artisan horizon:install"
+else
+    echo "Horizon is already installed, skipping."
+fi
+
+# Check if Breeze is installed and install if necessary
+if ! php artisan list | grep -q 'breeze:install'; then
+    echo "Running: php artisan breeze:install livewire --dark --pest"
+    php artisan breeze:install livewire --dark --pest || error_exit "Failed to run: php artisan breeze:install livewire --dark --pest"
+else
+    echo "Breeze is already installed, skipping."
+fi
+
+# Check if Pulse Service Provider is published and publish if necessary
+if ! php artisan vendor:publish --list | grep -q 'PulseServiceProvider'; then
+    echo "Running: php artisan vendor:publish --provider=\"Laravel\\Pulse\\PulseServiceProvider\""
+    php artisan vendor:publish --provider="Laravel\Pulse\PulseServiceProvider" || error_exit "Failed to run: php artisan vendor:publish --provider=\"Laravel\\Pulse\\PulseServiceProvider\""
+else
+    echo "Pulse Service Provider is already published, skipping."
+fi
+
+echo "Migrating a fresh database with 'php artisan migrate:fresh'"
+php artisan migrate:fresh
+
+echo "Laravel setup complete."
+

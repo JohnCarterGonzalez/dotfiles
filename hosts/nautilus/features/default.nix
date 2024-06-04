@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./i3.nix
-    ./docker.nix
+    ./podman.nix
     ./steam.nix
     ./bluetooth.nix
     ./pulseaudio.nix

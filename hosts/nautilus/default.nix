@@ -49,7 +49,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    docker-compose
     google-chrome
     vulkan-tools
     vulkan-loader
