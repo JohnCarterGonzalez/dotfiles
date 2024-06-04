@@ -74,6 +74,14 @@ else
     echo "Filament is already installed, skipping."
 fi
 
+# Check if filament-user is created and create if necessary
+if ! php artisan list | grep -q 'make:filament-user'; then
+    echo "Running: php artisan make:filament-user"
+    php artisan make:filament-user || error_exit "Failed to run: php artisan make:filament-user"
+else
+    echo "Filament user is already created, skipping."
+fi
+
 echo "Wiping the Database with php artisan db:wipe'"
 php artisan db:wipe
 
