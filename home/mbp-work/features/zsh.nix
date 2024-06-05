@@ -33,8 +33,6 @@
       gra = "git remote add origin";
 
       ll = "eza -la";
-      cd = "z";
-      zz = "z -";
     };
 
     history = {
