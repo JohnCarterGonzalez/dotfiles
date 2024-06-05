@@ -1,5 +1,7 @@
-{pkgs, config, ...}:
-{
+{ pkgs
+, config
+, ...
+}: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -9,13 +11,17 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      ls = "eza -la";
-
       nix-update = "sudo nixos-rebuild switch --flake ~/.cfg/.#nautilus";
       darwin-update = "darwin-rebuild switch --flake ~/.cfg/.#MBP-work";
       composer-up = "nix-shell -p php83Packages.composer";
 
-      nvm = "nvim";
+      tn = "tmux new-session -s";
+      ta = "tmux a -t";
+      tk = "tmux kill-session -t";
+
+      di = "devenv init";
+      ds = "devenv shell";
+      dup = "devenv up";
 
       gs = "git status";
       ga = "git add";
@@ -25,6 +31,10 @@
       gpl = "git pull";
       gp = "git push";
       gra = "git remote add origin";
+
+      ll = "eza -la";
+      cd = "z";
+      zz = "z -";
     };
 
     history = {
