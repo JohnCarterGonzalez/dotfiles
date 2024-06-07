@@ -1,8 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./lsp
-    ./tree-sitter
-    ./neo-vim
+    ./config
   ];
 
   programs.nixvim = {
@@ -27,17 +25,6 @@
     '';
 
     plugins = {
-      lualine = {
-        enable = true;
-        componentSeparators = {
-          left = "|";
-          right = "|";
-        };
-        sectionSeparators = {
-          left = "";
-          right = "";
-        };
-      };
       nvim-autopairs = {
         enable = true;
       };
@@ -48,54 +35,10 @@
         enable = true;
       };
 
-      harpoon = {
-        enable = true;
-        keymaps = {
-          addFile = "<leader>ha";
-          toggleQuickMenu = "<leader>hm";
-        };
-      };
       todo-comments = {
         enable = true;
       };
-      telescope = {
-        enable = true;
-        settings = {
-          defaults.file_ignore_patterns = [ "^.git/" ];
-        };
-      };
 
-      oil = {
-        enable = true;
-        settings = {
-          columns = [
-            "icon"
-            "size"
-            "permission"
-          ];
-          keymaps = {
-            "<C-c>" = false;
-            "<C-l>" = false;
-            "<C-r>" = "actions.refresh";
-            "<leader>qq" = "actions.close";
-            "y." = "actions.copy_entry_path";
-          };
-          skip_confirm_for_simple_edits = true;
-          view_options = {
-            show_hidden = true;
-          };
-          win_options = {
-            concealcursor = "ncv";
-            conceallevel = 3;
-            cursorcolumn = false;
-            foldcolumn = "0";
-            list = false;
-            signcolumn = "no";
-            spell = false;
-            wrap = false;
-          };
-        };
-      };
 
       trouble = {
         enable = true;
@@ -112,10 +55,6 @@
     };
 
     keymaps = [
-      {
-        action = "<cmd>Telescope find_files<CR>";
-        key = "<leader>ff";
-      }
       {
         action = "<cmd>Oil<CR>";
         key = "<leader>fd";
