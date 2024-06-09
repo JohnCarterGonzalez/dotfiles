@@ -1,11 +1,10 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
+{ inputs
+, lib
+, config
+, pkgs
+, ...
 }: {
   imports = [
     ../common
@@ -27,10 +26,9 @@
     username = "cpt_n3m0";
     packages = with pkgs; [ httpie ];
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  stateVersion = "23.11";
+    # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+    stateVersion = "23.11";
   };
-
 
   # Enable home-manager and git
   programs = {
@@ -38,5 +36,4 @@
   };
 
   systemd.user.startServices = "sd-switch";
-
 }

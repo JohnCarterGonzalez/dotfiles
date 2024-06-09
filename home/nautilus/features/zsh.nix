@@ -18,6 +18,8 @@
       darwin-update = "darwin-rebuild switch --flake ~/.cfg/.#MBP-work";
       composer-up = "nix-shell -p php83Packages.composer";
 
+      oo = "cd ~/vaults/windbreaker";
+
       tn = "tmux new-session -s";
       ta = "tmux a -t";
       tk = "tmux kill-session -t";

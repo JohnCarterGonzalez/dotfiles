@@ -39,7 +39,6 @@
         enable = true;
       };
 
-
       trouble = {
         enable = true;
       };
@@ -52,12 +51,17 @@
       number = true;
       relativenumber = true;
       shiftwidth = 2;
+      conceallevel = 1;
     };
 
     keymaps = [
       {
         action = "<cmd>Oil<CR>";
         key = "<leader>fd";
+      }
+      {
+        action = ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>";
+        key = "<leader>on";
       }
     ];
     autoCmd = [

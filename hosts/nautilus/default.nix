@@ -49,6 +49,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    (import ../../scripts/nixos/zsh/obsidian-on.nix { inherit pkgs; })
+    (import ../../scripts/nixos/zsh/obsidian-og.nix { inherit pkgs; })
     google-chrome
     vulkan-tools
     vulkan-loader
