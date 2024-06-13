@@ -19,6 +19,7 @@
       composer-up = "nix-shell -p php83Packages.composer";
 
       oo = "cd ~/vaults/windbreaker";
+      or = "vi $HOME/vaults/windbreaker/inbox/*.md";
 
       tn = "tmux new-session -s";
       ta = "tmux a -t";
@@ -37,7 +38,7 @@
       gp = "git push";
       gra = "git remote add origin";
 
-      ll = "eza -la";
+      ls = "eza -la";
       cd = "z";
       zz = "z -";
     };

@@ -22,6 +22,9 @@
         };
       };
       servers = {
+        ## markdown
+        marksman.enable = true;
+
         ## lua
         lua-ls = {
           enable = true;
@@ -44,7 +47,6 @@
 
         ## php
         phpactor.enable = true;
-        pest_ls.enable = true;
         emmet_ls = {
           enable = true;
           filetypes = [

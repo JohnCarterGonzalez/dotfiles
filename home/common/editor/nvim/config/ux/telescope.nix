@@ -7,13 +7,14 @@
       "<leader>ff" = "find_files";
       "<leader>fb" = "buffers";
       "<leader>fh" = "help_tags";
+      "<leader>fo" = "find_files search_dirs={\"$HOME/vaults/windbreaker/org\"}<cr>";
+      "<leader>foz" = "live_grep search_dirs={\"$HOME/vaults/windbreaker/org\"}<cr>";
     };
     settings = {
       defaults.file_ignore_patterns = [ "^.git/" ];
     };
     extensions = {
       fzf-native.enable = true;
-      frecency.enable = true;
       ui-select = {
         enable = true;
         settings = {

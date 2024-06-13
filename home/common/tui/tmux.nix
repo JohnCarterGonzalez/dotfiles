@@ -1,4 +1,8 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs
+, config
+, lib
+, ...
+}: {
   programs.tmux = {
     enable = true;
     keyMode = "vi";
@@ -16,7 +20,7 @@
       }
     ];
     extraConfig = ''
-            # split windows using | and - 
+            # split windows using | and -
             bind | split-window -h
             bind - split-window -v
             unbind '"'
@@ -30,8 +34,8 @@
             bind -r -T prefix j select-pane -D
             # resize panes using VIM style with prefix
             bind -r -T prefix H resize-pane -L 5
-            bind -r -T prefix L resize-pane -R 5 
-            bind -r -T prefix K resize-pane -U 5 
+            bind -r -T prefix L resize-pane -R 5
+            bind -r -T prefix K resize-pane -U 5
             bind -r -T prefix J resize-pane -D 5
             # DESIGN TWEAKS
             # don't do anything when a 'bell' rings
@@ -97,5 +101,4 @@
 
     '';
   };
-
 }
