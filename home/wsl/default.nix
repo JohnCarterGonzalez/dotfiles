@@ -8,6 +8,7 @@
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ../common
+    ./features
   ];
 
   nix = {
@@ -44,7 +45,6 @@
       (import ../../scripts/nixos/zsh/obsidian-og.nix { inherit pkgs; })
       httpie
       devenv
-
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

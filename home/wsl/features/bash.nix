@@ -5,10 +5,6 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    autosuggestion = {
-      enable = true;
-    };
-    syntaxHighlighting.enable = true;
 
     shellAliases = {
       nix-update = "sudo nixos-rebuild switch --flake ~/.cfg/.#nautilus";
@@ -33,11 +29,7 @@
       gp = "git push";
       gra = "git remote add origin";
 
-      ll = "eza -la";
-    };
-
-    history = {
-      size = 10000;
+      ls = "eza -la";
     };
   };
 }
