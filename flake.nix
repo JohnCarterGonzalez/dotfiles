@@ -7,7 +7,8 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs"; };
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -20,9 +21,9 @@
     };
   };
 
-  outputs = inputs: with inputs;
-  let
-    inherit (self) outputs;
+  outputs = inputs:
+    with inputs; let
+      inherit (self) outputs;
 
       systems = [
         "aarch64-linux"
@@ -32,19 +33,35 @@
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
-    in {
+    in
+    {
       packages =
         forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system}.alejandra);
       formatter =
         forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-
       # Available through 'nixos-rebuild --flake .#nautilus'
       nixosConfigurations = {
         nautilus = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs outputs;};
+          specialArgs = { inherit inputs outputs; };
           modules = [
-          ./hosts/nautilus
+            ./hosts/nautilus
+          ];
+        };
+      };
+
+      homeConfigurations = {
+        # WSL
+        "cpt_n3m0" = home-manager.lib.homeManagerConfiguration {
+          pkgs =
+            let
+              system = "x86_64-linux";
+            in
+            nixpkgs.legacyPackages.${system};
+          extraSpecialArgs = { inherit inputs outputs; };
+
+          modules = [
+            ./home/wsl
           ];
         };
       };
@@ -58,12 +75,14 @@
           nixvim.nixDarwinModules.nixvim
           home-manager.darwinModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.johncartergonzalez = import ./home/mbp-work {
-              inherit inputs outputs;
-              inherit (nixpkgs) lib;
-              inherit (config) config pkgs;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.johncartergonzalez = import ./home/mbp-work {
+                inherit inputs outputs;
+                inherit (nixpkgs) lib;
+                inherit (config) config pkgs;
+              };
             };
           }
         ];
