@@ -41,8 +41,8 @@
     # The home.packages option allows you to install Nix packages into your
     # environment.
     packages = with pkgs; [
-      (import ../../scripts/nixos/zsh/obsidian-on.nix { inherit pkgs; })
-      (import ../../scripts/nixos/zsh/obsidian-og.nix { inherit pkgs; })
+      (import ../../scripts/workflow/shell/obsidian-on.nix { inherit pkgs; })
+      (import ../../scripts/workflow/shell/obsidian-og.nix { inherit pkgs; })
       httpie
       devenv
     ];

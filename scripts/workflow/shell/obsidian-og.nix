@@ -2,7 +2,7 @@
 pkgs.writeShellScriptBin "og" ''
     # Directory containing markdown files
   VAULT_DIR="$HOME/vaults/windbreaker"
-  SOURCE_DIR="notes"
+  SOURCE_DIR="inbox"
   DEST_DIR="org"
 
 
