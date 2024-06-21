@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   imports = [ ./cmp.nix ./none-ls.nix ];
   programs.nixvim.plugins = {
     lsp-format.enable = true;
@@ -12,6 +12,12 @@
     lsp = {
       enable = true;
       keymaps = {
+        silent = true;
+        diagnostic = {
+          # Navigate in diagnostics
+          "<leader>k" = "goto_prev";
+          "<leader>j" = "goto_next";
+        };
         lspBuf = {
           ca = "code_action";
           K = "hover";

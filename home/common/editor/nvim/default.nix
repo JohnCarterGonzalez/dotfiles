@@ -7,6 +7,12 @@
     enable = true;
     defaultEditor = true;
     viAlias = true;
+    clipboard = {
+      register = "unnamedplus";
+      providers = {
+        wl-copy.enable = true;
+      };
+    };
     extraConfigLua = ''
       local api = vim.api
       local cmd = vim.cmd
@@ -24,66 +30,54 @@
       )
       cmd.colorscheme("gruvbuddy")
 
-      opts.clipboard:append('unnamedplus')
+      vim.g.blade_custom_directives = {
+          'if', 'elseif', 'else', 'endif', 'foreach', 'endforeach', 
+          'continue', 'break', 'isset', 'empty', 'auth', 'guest', 
+          'endauth', 'csrf', 'verbatim', 'once', 'old', 'switch', 
+          'case', 'endswitch', 'include', 'component', 'endcomponent', 
+          'props', 'slot', 'endslot', 'yield', 'parent', 'section', 
+          'endsection', 'extend', 'includeWhen', 'includeUnless', 
+          'php', 'endphp', 'foreach', 'continue', 'endforeach', 'for', 
+          'endfor', 'while', 'endwhile', 'forelse', 'endforelse', 
+          'unless', 'endunless', 'unless', 'endunless', 'isset', 'empty',
+      }
+
+      vim.g.blade_custom_directives_pairs = {
+          ['markdown'] = 'endmarkdown',
+          ['cache'] = 'endcache',
+          ['auth'] = 'endauth',
+          ['component'] = 'endcomponent',
+          ['slot'] = 'endslot',
+          ['section'] = 'endsection',
+          ['switch'] = 'endswitch',
+          ['foreach'] = 'endforeach',
+          ['forelse'] = 'endforelse',
+          ['unless'] = 'endunless',
+          ['php'] = 'endphp',
+      }
+
     '';
 
-    plugins = {
-      nvim-autopairs = {
-        enable = true;
-      };
-      comment = {
-        enable = true;
-      };
-      nix = {
-        enable = true;
-      };
-
-      todo-comments = {
-        enable = true;
-      };
-
-      trouble = {
-        enable = true;
-      };
-
-      clangd-extensions.enable = true;
-    };
-
-    globals.mapleader = " ";
-    opts = {
-      number = true;
-      relativenumber = true;
-      shiftwidth = 2;
-      conceallevel = 1;
-    };
-
-    keymaps = [
-      {
-        action = "<cmd>Oil<CR>";
-        key = "<leader>fd";
-      }
-      {
-        action = ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>";
-        key = "<leader>on";
-      }
-      {
-        action = ":!mv '%:p' $HOME/vaults/windbreaker/notes<cr>:bd<cr>";
-        key = "<leader>ok";
-      }
-      {
-        action = ":!rm '%:p'<cr>:bd<cr>";
-        key = "<leader>odd";
-      }
-    ];
-    autoCmd = [
-      {
-        event = [ "BufEnter" "BufWinEnter" ];
-        pattern = [ "*.c" "*.h" ];
-        command = "echo 'Abandon all hope ye who enter'";
-      }
-    ];
-    extraPlugins = with pkgs.vimPlugins; [
-      colorbuddy-nvim
+    extraPlugins = [
+      pkgs.vimPlugins.colorbuddy-nvim
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "vim-blade";
+        src = pkgs.fetchFromGitHub {
+          owner = "jwalton512";
+          repo = "vim-blade";
+          rev = "9534101808cc320eef003129a40cab04b026a20c";
+          hash = "sha256-DSCHZl/DydC485saAOr4kpHjzEjDxsfzRdty+y4be8Y=";
+        };
+      })
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "laravel.nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "adalessa";
+          repo = "laravel.nvim";
+          rev = "baafe3c0072ecb7c8f1efc9ed5e3c96ff4fbf056";
+          hash = "sha256-aIhzN5sbtdb8KyrGdPqaMHDDo9dSZDSeNEwR3TVJkAI=";
+        };
+      })
     ];
   };
 }

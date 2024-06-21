@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.nixvim.plugins.none-ls = {
     enable = true;
     cmd = [ "bash -c nvim" ];
