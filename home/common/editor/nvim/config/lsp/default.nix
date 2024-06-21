@@ -26,9 +26,7 @@
         marksman.enable = true;
 
         ## lua
-        lua-ls = {
-          enable = true;
-        };
+        lua-ls.enable = true;
 
         ## c/c++
         clangd.enable = true;
@@ -47,7 +45,7 @@
 
         ## php
         phpactor.enable = true;
-        emmet_ls = {
+        emmet-ls = {
           enable = true;
           filetypes = [
             "blade"

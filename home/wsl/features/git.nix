@@ -1,8 +1,10 @@
-{ pkgs, config, ...}:
-{
-   programs.git = {
+{ pkgs
+, config
+, ...
+}: {
+  programs.git = {
     enable = true;
-    userName  = "neto";
+    userName = "neto";
     userEmail = "public@neto.com";
     extraConfig = {
       init = {

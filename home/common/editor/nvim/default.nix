@@ -9,6 +9,8 @@
     viAlias = true;
     extraConfigLua = ''
       local api = vim.api
+      local cmd = vim.cmd
+      local opts = vim.opt
 
       -- Highlight on yank
       api.nvim_exec(
@@ -20,8 +22,9 @@
         ]],
               false
       )
-      vim.cmd.colorscheme("gruvbuddy")
+      cmd.colorscheme("gruvbuddy")
 
+      opts.clipboard:append('unnamedplus')
     '';
 
     plugins = {
