@@ -49,8 +49,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    (import ../../scripts/nixos/zsh/obsidian-on.nix { inherit pkgs; })
-    (import ../../scripts/nixos/zsh/obsidian-og.nix { inherit pkgs; })
+    (import ../../scripts/workflow/shell/obsidian-on.nix { inherit pkgs; })
+    (import ../../scripts/workflow/shell/obsidian-og.nix { inherit pkgs; })
     xsel
     google-chrome
     vulkan-tools
