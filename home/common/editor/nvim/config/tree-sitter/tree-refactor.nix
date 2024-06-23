@@ -1,10 +1,12 @@
-{pkgs, lib, ...}:
 {
   programs.nixvim = {
-  plugins = {
-    treesitter-refactor = {
+    plugins = {
+      treesitter-refactor = {
         enable = true;
-        highlightDefinitions.enable = true;
+        highlightDefinitions = {
+          enable = true;
+          clearOnCursorMove = false;
+        };
         navigation = {
           enable = true;
           keymaps = {
@@ -13,7 +15,7 @@
             gotoPreviousUsage = "gt:";
             listDefinitionsToc = "gtL";
           };
-        }; 
+        };
       };
 
       treesitter-textobjects = {
@@ -26,4 +28,3 @@
     };
   };
 }
-

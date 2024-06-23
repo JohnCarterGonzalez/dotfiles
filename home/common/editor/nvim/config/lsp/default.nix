@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   imports = [ ./cmp.nix ./none-ls.nix ];
   programs.nixvim.plugins = {
     lsp-format.enable = true;
@@ -12,6 +12,12 @@
     lsp = {
       enable = true;
       keymaps = {
+        silent = true;
+        diagnostic = {
+          # Navigate in diagnostics
+          "<leader>k" = "goto_prev";
+          "<leader>j" = "goto_next";
+        };
         lspBuf = {
           ca = "code_action";
           K = "hover";
@@ -26,9 +32,7 @@
         marksman.enable = true;
 
         ## lua
-        lua-ls = {
-          enable = true;
-        };
+        lua-ls.enable = true;
 
         ## c/c++
         clangd.enable = true;
@@ -47,7 +51,7 @@
 
         ## php
         phpactor.enable = true;
-        emmet_ls = {
+        emmet-ls = {
           enable = true;
           filetypes = [
             "blade"

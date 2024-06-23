@@ -1,3 +1,3 @@
-{ pkgs, ... }: {
-  imports = [ ./ux ./lsp ./tree-sitter ./neo-vim ];
+{
+  imports = [ ./settings ./ux ./lsp ./tree-sitter ./neo-vim ];
 }

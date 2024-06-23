@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.nixvim.plugins.none-ls = {
     enable = true;
-    cmd = ["bash -c nvim"];
+    cmd = [ "bash -c nvim" ];
     debug = true;
     sources = {
       code_actions = {
@@ -12,10 +13,6 @@
         deadnix.enable = true;
       };
       formatting = {
-        alejandra = {
-          enable = true;
-          package = pkgs.alejandra;
-        };
         stylua = {
           enable = true;
           package = pkgs.stylua;
