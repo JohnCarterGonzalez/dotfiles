@@ -11,8 +11,8 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      nix-update = "sudo nixos-rebuild switch --flake ~/.cfg/.#nautilus";
-      darwin-update = "darwin-rebuild switch --flake ~/.cfg/.#MBP-work";
+      nix-update = "sudo nixos-rebuild switch --flake ~/git/.cfg/.#nautilus";
+      darwin-update = "darwin-rebuild switch --flake ~/git/.cfg/.#MBP-work";
       composer-up = "nix-shell -p php83Packages.composer";
 
       tn = "tmux new-session -s";

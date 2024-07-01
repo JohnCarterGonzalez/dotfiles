@@ -10,7 +10,7 @@
     clipboard = {
       register = "unnamedplus";
       providers = {
-        wl-copy.enable = true;
+        xsel.enable = true;
       };
     };
     extraConfigLua = ''
@@ -28,7 +28,6 @@
         ]],
               false
       )
-      cmd.colorscheme("gruvbuddy")
 
       vim.g.blade_custom_directives = {
           'if', 'elseif', 'else', 'endif', 'foreach', 'endforeach', 
@@ -59,7 +58,6 @@
     '';
 
     extraPlugins = [
-      pkgs.vimPlugins.colorbuddy-nvim
       (pkgs.vimUtils.buildVimPlugin {
         name = "vim-blade";
         src = pkgs.fetchFromGitHub {
