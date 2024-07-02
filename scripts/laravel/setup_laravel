@@ -1,92 +1,56 @@
 #!/usr/bin/env bash
 
-# Error handling
-set -euo pipefail
-
-# Function to print error messages
-error_exit() {
-    echo "$1" 1>&2
-    exit 1
+# Function to check if a package is already installed
+is_installed() {
+  local package=$1
+  if composer show "$package" > /dev/null 2>&1; then
+    return 0
+  else
+    return 1
+  fi
 }
 
-# Get the directory of the current script
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PARENT_DIR="$(dirname "$SCRIPT_DIR")"
-
-echo "Setting up Laravel dependencies..."
-
-# Change to the parent directory
-cd "$PARENT_DIR" || error_exit "Failed to change to parent directory: $PARENT_DIR"
-
-echo "Adding to composer.json:"
-
-declare -a packages=("laravel/pulse" "laravel/horizon" "laravel/breeze --dev" "laravel/pint --dev" "laravel/octane")
+# List of packages to install
+packages=(
+  "laravel/breeze"
+  "laravel/pint --dev"
+  "laravel/pulse"
+  "laravel/horizon"
+  "laravel/dusk --dev"
+)
 
 for package in "${packages[@]}"; do
-    package_name=$(echo "$package" | cut -d' ' -f1)
-    if composer show "$package_name" > /dev/null 2>&1; then
-        echo "$package_name is already installed, skipping."
-    else
-        echo "Installing $package_name..."
-        composer require $package || error_exit "Failed to add package: $package"
-    fi
+  if is_installed "$package"; then
+    echo "$package is already installed."
+  else
+    echo "Installing $package..."
+    composer require $package
+  fi
 done
 
-# Install Filament package separately due to specific version and options
-if composer show filament/filament > /dev/null 2>&1; then
-    echo "filament/filament is already installed, skipping."
-else
-    echo "Installing filament/filament..."
-    composer require filament/filament:"^3.2" -W || error_exit "Failed to add package: filament/filament"
-fi
-
-echo "Running additional Laravel setup commands..."
-
-# Check if Horizon is installed and install if necessary
-if ! php artisan list | grep -q 'horizon:install'; then
-    echo "Running: php artisan horizon:install"
-    php artisan horizon:install || error_exit "Failed to run: php artisan horizon:install"
-else
-    echo "Horizon is already installed, skipping."
-fi
-
-# Check if Breeze is installed and install if necessary
+# Check and install Breeze with Livewire, dark mode, and Pest
 if ! php artisan list | grep -q 'breeze:install'; then
-    echo "Running: php artisan breeze:install livewire --dark --pest"
-    php artisan breeze:install livewire --dark --pest || error_exit "Failed to run: php artisan breeze:install livewire --dark --pest"
+  echo "Laravel Breeze not installed. Installing Breeze with Livewire, dark mode, and Pest..."
+  php artisan breeze:install livewire --dark --pest
 else
-    echo "Breeze is already installed, skipping."
+  echo "Laravel Breeze is already installed."
 fi
 
-# Check if Pulse Service Provider is published and publish if necessary
-if ! php artisan vendor:publish --list | grep -q 'PulseServiceProvider'; then
-    echo "Running: php artisan vendor:publish --provider=\"Laravel\\Pulse\\PulseServiceProvider\""
-    php artisan vendor:publish --provider="Laravel\Pulse\PulseServiceProvider" || error_exit "Failed to run: php artisan vendor:publish --provider=\"Laravel\\Pulse\\PulseServiceProvider\""
+# Publish Pulse assets
+if ! php artisan list | grep -q 'pulse:publish'; then
+  echo "Publishing Pulse assets..."
+  php artisan vendor:publish --provider="Laravel\Pulse\PulseServiceProvider"
 else
-    echo "Pulse Service Provider is already published, skipping."
+  echo "Pulse assets already published."
 fi
 
-# Check if Filament is installed and install if necessary
-if ! php artisan list | grep -q 'filament:install'; then
-    echo "Running: php artisan filament:install --panels"
-    php artisan filament:install --panels || error_exit "Failed to run: php artisan filament:install --panels"
+# Publish Horizon assets
+if ! php artisan list | grep -q 'horizon:install'; then
+  echo "Publishing Horizon assets..."
+  php artisan horizon:install
 else
-    echo "Filament is already installed, skipping."
+  echo "Horizon assets already published."
 fi
 
-# Check if filament-user is created and create if necessary
-if ! php artisan list | grep -q 'make:filament-user'; then
-    echo "Running: php artisan make:filament-user"
-    php artisan make:filament-user || error_exit "Failed to run: php artisan make:filament-user"
-else
-    echo "Filament user is already created, skipping."
-fi
-
-echo "Wiping the Database with php artisan db:wipe'"
-php artisan db:wipe
-
-echo "Migrating a fresh database with 'php artisan migrate:fresh'"
-php artisan migrate:fresh
-
-echo "Laravel setup complete."
+echo "All specified packages and configurations have been processed."
 
