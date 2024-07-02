@@ -2,9 +2,13 @@
 {
   programs.nixvim = {
     colorschemes = {
-      modus.enable = true;
+      modus.enable = false;
       gruvbox.enable = false;
       kanagawa = {
+        enable = false;
+        settings = { };
+      };
+      everforest = {
         enable = false;
         settings = { };
       };
@@ -16,12 +20,34 @@
       };
       oxocarbon.enable = false;
       rose-pine = {
-        enable = false;
+        enable = true;
         settings = { };
       };
       catppuccin = {
         enable = false;
-        settings = { };
+        settings = {
+          before_highlight = "function(group, highlight, palette) end";
+          dark_variant = "main";
+          dim_inactive_windows = true;
+          enable = {
+            legacy_highlights = false;
+            migrations = true;
+            terminal = true;
+          };
+          extend_background_behind_borders = true;
+          groups = {
+            border = "muted";
+            link = "iris";
+            panel = "surface";
+          };
+          highlight_groups = { };
+          styles = {
+            bold = false;
+            italic = true;
+            transparency = true;
+          };
+          variant = "auto";
+        };
       };
     };
 

@@ -2,8 +2,10 @@
 {
   programs.nixvim.plugins.none-ls = {
     enable = true;
-    cmd = [ "bash -c nvim" ];
-    debug = true;
+    settings = {
+      debug = true;
+      cmd = [ "bash -c nvim" ];
+    };
     sources = {
       code_actions = {
         statix.enable = true;
